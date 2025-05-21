@@ -1,11 +1,10 @@
-﻿namespace SolutionScribe
+﻿namespace SolutionScribe;
+
+[Command(PackageIds.CreateReleaseNotesCommandId)]
+internal sealed class CreateReleaseNotesCommand : BaseCommand<CreateReleaseNotesCommand>
 {
-    [Command(PackageIds.CreateReleaseNotesCommandId)]
-    internal sealed class CreateReleaseNotesCommand : BaseCommand<CreateReleaseNotesCommand>
+    protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
     {
-        protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
-        {
-            await VS.MessageBox.ShowWarningAsync("CreateReleaseNotesCommand", "Button clicked");
-        }
+        await VS.MessageBox.ShowWarningAsync("CreateReleaseNotesCommand", "Button clicked");
     }
 }

@@ -4,6 +4,7 @@
 	<!-- Include standard Visual Studio command IDs -->
 	<Extern href="stdidcmd.h"/>
 	<Extern href="vsshlids.h"/>
+	<Include href="VSGlobals.vsct"/>
 
 	<!-- Define command IDs -->
 	<Commands package="guidSolutionScribePkg">
