@@ -45,9 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Commands\CreateContributionsCommand.cs" />
+    <Compile Include="Commands\CreateContributingCommand.cs" />
     <Compile Include="Commands\CreateLicenseCommand.cs" />
-    <Compile Include="Commands\CreateReleaseNotesCommand.cs" />
+    <Compile Include="Commands\CreateChangeLogCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\CreateReadmeCommand.cs" />
     <Compile Include="SolutionScribePackage.cs" />

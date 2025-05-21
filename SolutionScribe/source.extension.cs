@@ -10,7 +10,7 @@ namespace SolutionScribe
     {
         public const string Id = "SolutionScribe.f6ef388d-6547-4b96-80a6-148ea664e35c";
         public const string Name = "Solution Scribe";
-        public const string Description = @"Create LICENSE, README, CONTRIBUTIONS, and RELEASE_NOTES documents for your solutions.";
+        public const string Description = @"Create LICENSE, README, CONTRIBUTING, and CHANGELOG documents for your solutions.";
         public const string Language = "en-US";
         public const string Version = "0.1";
         public const string Author = "Scott Lilly";
