@@ -28,9 +28,9 @@ namespace SolutionScribe
         public const int SolutionScribeMenuGroup = 0x1000;
         public const int SolutionScribeMenu = 0x1001;
         public const int SolutionScribeSubMenuGroup = 0x1002;
-        public const int CreateReadmeCommandId = 0x0100;
-        public const int CreateLicenseCommandId = 0x0101;
-        public const int CreateContributingCommandId = 0x0102;
-        public const int CreateChangeLogCommandId = 0x0103;
+        public const int CreateLicenseCommandId = 0x0100;
+        public const int CreateReadmeCommandId = 0x0101;
+        public const int CreateChangeLogCommandId = 0x0102;
+        public const int CreateContributingCommandId = 0x0103;
     }
 }

@@ -37,7 +37,7 @@
 		<Buttons>
 
 			<!-- Create LICENSE Command -->
-			<Button guid="guidSolutionScribeCmdSet" id="CreateLicenseCommandId" priority="0x0101" type="Button">
+			<Button guid="guidSolutionScribeCmdSet" id="CreateLicenseCommandId" priority="0x0100" type="Button">
 				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeSubMenuGroup"/>
 				<Strings>
 					<ButtonText>Create LICENSE file</ButtonText>
@@ -46,7 +46,7 @@
 			</Button>
 
 			<!-- Create README Command -->
-			<Button guid="guidSolutionScribeCmdSet" id="CreateReadmeCommandId" priority="0x0100" type="Button">
+			<Button guid="guidSolutionScribeCmdSet" id="CreateReadmeCommandId" priority="0x0101" type="Button">
 				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeSubMenuGroup"/>
 				<Strings>
 					<ButtonText>Create README file</ButtonText>
@@ -54,21 +54,21 @@
 				</Strings>
 			</Button>
 
-			<!-- Create CONTRIBUTING Command -->
-			<Button guid="guidSolutionScribeCmdSet" id="CreateContributingCommandId" priority="0x0102" type="Button">
-				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeSubMenuGroup"/>
-				<Strings>
-					<ButtonText>Create CONTRIBUTING file</ButtonText>
-					<CommandName>CreateContributing</CommandName>
-				</Strings>
-			</Button>
-
 			<!-- Create CHANGELOG Command -->
-			<Button guid="guidSolutionScribeCmdSet" id="CreateChangeLogCommandId" priority="0x0103" type="Button">
+			<Button guid="guidSolutionScribeCmdSet" id="CreateChangeLogCommandId" priority="0x0102" type="Button">
 				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeSubMenuGroup"/>
 				<Strings>
 					<ButtonText>Create CHANGELOG file</ButtonText>
 					<CommandName>CreateChangeLog</CommandName>
+				</Strings>
+			</Button>
+
+			<!-- Create CONTRIBUTING Command -->
+			<Button guid="guidSolutionScribeCmdSet" id="CreateContributingCommandId" priority="0x0103" type="Button">
+				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeSubMenuGroup"/>
+				<Strings>
+					<ButtonText>Create CONTRIBUTING file</ButtonText>
+					<CommandName>CreateContributing</CommandName>
 				</Strings>
 			</Button>
 			
@@ -89,10 +89,10 @@
 			<IDSymbol name="SolutionScribeSubMenuGroup" value="0x1002"/>
 
 			<!-- Command IDs -->
-			<IDSymbol name="CreateReadmeCommandId" value="0x0100"/>
-			<IDSymbol name="CreateLicenseCommandId" value="0x0101"/>
-			<IDSymbol name="CreateContributingCommandId" value="0x0102"/>
-			<IDSymbol name="CreateChangeLogCommandId" value="0x0103"/>
+			<IDSymbol name="CreateLicenseCommandId" value="0x0100"/>
+			<IDSymbol name="CreateReadmeCommandId" value="0x0101"/>
+			<IDSymbol name="CreateChangeLogCommandId" value="0x0102"/>
+			<IDSymbol name="CreateContributingCommandId" value="0x0103"/>
 		</GuidSymbol>
 	</Symbols>
 
