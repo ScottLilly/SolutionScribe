@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<!-- Include standard Visual Studio command IDs -->
+	<Extern href="stdidcmd.h"/>
+	<Extern href="vsshlids.h"/>
+
+	<!-- Define command IDs -->
+	<Commands package="guidSolutionScribePkg">
+		<!-- Groups -->
+		<Groups>
+			<!-- Parent group for the SolutionScribe menu under Tools -->
+			<Group guid="guidSolutionScribeCmdSet" id="SolutionScribeMenuGroup" priority="0x0600">
+				<Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
+			</Group>
+
+			<!-- Sub-menu group for the commands under SolutionScribe -->
+			<Group guid="guidSolutionScribeCmdSet" id="SolutionScribeSubMenuGroup" priority="0x0100">
+				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeMenu"/>
+			</Group>
+		</Groups>
+
+		<!-- Menus -->
+		<Menus>
+			<!-- SolutionScribe menu under Tools -->
+			<Menu guid="guidSolutionScribeCmdSet" id="SolutionScribeMenu" priority="0x0100" type="Menu">
+				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeMenuGroup"/>
+				<Strings>
+					<ButtonText>Solution Scribe</ButtonText>
+					<CommandName>SolutionScribe</CommandName>
+				</Strings>
+			</Menu>
+		</Menus>
+
+		<!-- Buttons (Commands) -->
+		<Buttons>
+
+			<!-- Create LICENSE Command -->
+			<Button guid="guidSolutionScribeCmdSet" id="CreateLicenseCommandId" priority="0x0101" type="Button">
+				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeSubMenuGroup"/>
+				<Strings>
+					<ButtonText>Create LICENSE file</ButtonText>
+					<CommandName>CreateLicense</CommandName>
+				</Strings>
+			</Button>
+
+			<!-- Create README Command -->
+			<Button guid="guidSolutionScribeCmdSet" id="CreateReadmeCommandId" priority="0x0100" type="Button">
+				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeSubMenuGroup"/>
+				<Strings>
+					<ButtonText>Create README file</ButtonText>
+					<CommandName>CreateReadme</CommandName>
+				</Strings>
+			</Button>
+
+			<!-- Create CONTRIBUTIONS Command -->
+			<Button guid="guidSolutionScribeCmdSet" id="CreateContributionsCommandId" priority="0x0102" type="Button">
+				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeSubMenuGroup"/>
+				<Strings>
+					<ButtonText>Create CONTRIBUTIONS file</ButtonText>
+					<CommandName>CreateContributions</CommandName>
+				</Strings>
+			</Button>
+
+			<!-- Create RELEASE_NOTES Command -->
+			<Button guid="guidSolutionScribeCmdSet" id="CreateReleaseNotesCommandId" priority="0x0103" type="Button">
+				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeSubMenuGroup"/>
+				<Strings>
+					<ButtonText>Create RELEASE NOTES file</ButtonText>
+					<CommandName>CreateReleaseNotes</CommandName>
+				</Strings>
+			</Button>
+			
+		</Buttons>
+		
+	</Commands>
+
+	<!-- Define GUIDs and IDs -->
+	<Symbols>
+		<!-- Package GUID -->
+		<GuidSymbol name="guidSolutionScribePkg" value="{f1a2b3c4-d5e6-7890-abcd-ef1234567890}"/>
+
+		<!-- Command Set GUID -->
+		<GuidSymbol name="guidSolutionScribeCmdSet" value="{a1b2c3d4-e5f6-7890-abcd-ef1234567890}">
+			<!-- Menu and Group IDs -->
+			<IDSymbol name="SolutionScribeMenuGroup" value="0x1000"/>
+			<IDSymbol name="SolutionScribeMenu" value="0x1001"/>
+			<IDSymbol name="SolutionScribeSubMenuGroup" value="0x1002"/>
+
+			<!-- Command IDs -->
+			<IDSymbol name="CreateReadmeCommandId" value="0x0100"/>
+			<IDSymbol name="CreateLicenseCommandId" value="0x0101"/>
+			<IDSymbol name="CreateContributionsCommandId" value="0x0102"/>
+			<IDSymbol name="CreateReleaseNotesCommandId" value="0x0103"/>
+		</GuidSymbol>
+	</Symbols>
+
+</CommandTable>
