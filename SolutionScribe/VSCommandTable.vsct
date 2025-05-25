@@ -1,109 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-	<!-- Include standard Visual Studio command IDs -->
-	<Extern href="stdidcmd.h"/>
-	<Extern href="vsshlids.h"/>
-	<Include href="VSGlobals.vsct"/>
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+  <Include href="KnownImageIds.vsct"/>
+  <Include href="VSGlobals.vsct"/>
 
-	<!-- Define command IDs -->
-	<Commands package="guidSolutionScribePkg">
+  <Commands package="SolutionScribe">
+    <Groups>
+      <Group guid="SolutionScribe" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="VSMainMenu" id="Tools"/>
+      </Group>
+    </Groups>
 
-		<!-- Groups -->
-		<Groups>
-			<!-- Parent group for the SolutionScribe menu under Tools -->
-			<Group guid="guidSolutionScribeCmdSet" id="SolutionScribeMenuGroup" priority="0x0600">
-				<Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
-			</Group>
+    <!--This section defines the elements the user can interact with, like a menu command or a button
+        or combo box in a toolbar. -->
+    <Buttons>
+      <Button guid="SolutionScribe" id="MyCommand" priority="0x0100" type="Button">
+        <Parent guid="SolutionScribe" id="MyMenuGroup" />
+        <Icon guid="ImageCatalogGuid" id="StatusInformation" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>Solution Scribe</ButtonText>
+          <LocCanonicalName>.SolutionScribe.MyCommand</LocCanonicalName>
+        </Strings>
+      </Button>
+    </Buttons>
+  </Commands>
 
-			<!-- Sub-menu group for the commands under SolutionScribe -->
-			<Group guid="guidSolutionScribeCmdSet" id="SolutionScribeSubMenuGroup" priority="0x0100">
-				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeMenu"/>
-			</Group>
-
-			<!-- Sub-menu group for the different license files that can be created -->
-			<Group guid="guidSolutionScribeCmdSet" id="CreateLicenseSubMenuGroup" priority="0x0200">
-				<Parent guid="guidSolutionScribeCmdSet" id="CreateLicenseSubMenu"/>
-			</Group>
-		</Groups>
-
-		<!-- Menus -->
-		<Menus>
-			<!-- SolutionScribe menu under Tools -->
-			<Menu guid="guidSolutionScribeCmdSet" id="SolutionScribeMenu" priority="0x0100" type="Menu">
-				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeMenuGroup"/>
-				<Strings>
-					<ButtonText>Solution Scribe</ButtonText>
-				</Strings>
-			</Menu>
-
-			<!-- Sub-menu for the license file selection -->
-			<Menu guid="guidSolutionScribeCmdSet" id="CreateLicenseSubMenu" priority="0x0100" type="Menu">
-				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeSubMenuGroup"/>
-				<Strings>
-					<ButtonText>Create LICENSE.txt file...</ButtonText>
-				</Strings>
-			</Menu>
-		</Menus>
-
-		<!-- Buttons (Commands) -->
-		<Buttons>
-
-			<!-- Create README Command -->
-			<Button guid="guidSolutionScribeCmdSet" id="CreateReadmeCommandId" priority="0x0101" type="Button">
-				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeSubMenuGroup"/>
-				<Strings>
-					<ButtonText>Create README.md file</ButtonText>
-				</Strings>
-			</Button>
-
-			<!-- Create CHANGELOG Command -->
-			<Button guid="guidSolutionScribeCmdSet" id="CreateChangeLogCommandId" priority="0x0102" type="Button">
-				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeSubMenuGroup"/>
-				<Strings>
-					<ButtonText>Create CHANGELOG.md file</ButtonText>
-				</Strings>
-			</Button>
-
-			<!-- Create CONTRIBUTING Command -->
-			<Button guid="guidSolutionScribeCmdSet" id="CreateContributingCommandId" priority="0x0103" type="Button">
-				<Parent guid="guidSolutionScribeCmdSet" id="SolutionScribeSubMenuGroup"/>
-				<Strings>
-					<ButtonText>Create CONTRIBUTING.md file</ButtonText>
-				</Strings>
-			</Button>
-
-			<!-- Create LICENSE.txt Command (MIT License) -->
-			<Button guid="guidSolutionScribeCmdSet" id="CreateMITLicenseCommandId" priority="0x0001" type="Button">
-				<Parent guid="guidSolutionScribeCmdSet" id="CreateLicenseSubMenuGroup"/>
-				<Strings>
-					<ButtonText>MIT license</ButtonText>
-				</Strings>
-			</Button>
-
-		</Buttons>
-
-	</Commands>
-
-	<!-- Define GUIDs and IDs -->
-	<Symbols>
-		<!-- Package GUID -->
-		<GuidSymbol name="guidSolutionScribePkg" value="{f1a2b3c4-d5e6-7890-abcd-ef1234567890}"/>
-
-		<!-- Command Set GUID -->
-		<GuidSymbol name="guidSolutionScribeCmdSet" value="{a1b2c3d4-e5f6-7890-abcd-ef1234567890}">
-			<!-- Menu and Group IDs -->
-			<IDSymbol name="SolutionScribeMenuGroup" value="0x1000"/>
-			<IDSymbol name="SolutionScribeMenu" value="0x1001"/>
-			<IDSymbol name="SolutionScribeSubMenuGroup" value="0x1002"/>
-			<IDSymbol name="CreateLicenseSubMenu" value="0x1003"/>
-			<IDSymbol name="CreateLicenseSubMenuGroup" value="0x1004"/>
-			<IDSymbol name="CreateMITLicenseCommandId" value="0x0104"/>
-			<!-- Command IDs -->
-			<IDSymbol name="CreateReadmeCommandId" value="0x0101"/>
-			<IDSymbol name="CreateChangeLogCommandId" value="0x0102"/>
-			<IDSymbol name="CreateContributingCommandId" value="0x0103"/>
-		</GuidSymbol>
-	</Symbols>
-
+  <Symbols>
+    <GuidSymbol name="SolutionScribe" value="{c2a25aa6-71a0-4dd6-9974-49f9035e55a2}">
+      <IDSymbol name="MyMenuGroup" value="0x0001" />
+      <IDSymbol name="MyCommand" value="0x0100" />
+    </GuidSymbol>
+  </Symbols>
 </CommandTable>
