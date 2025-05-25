@@ -5,16 +5,17 @@ global using Task = System.Threading.Tasks.Task;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace SolutionScribe;
-
-[PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
-[InstalledProductRegistration(Vsix.Name, Vsix.Description, Vsix.Version)]
-[ProvideMenuResource("Menus.ctmenu", 1)]
-[Guid(PackageGuids.guidSolutionScribePkgString)]
-public sealed class SolutionScribePackage : ToolkitPackage
+namespace SolutionScribe
 {
-    protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
+    [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
+    [InstalledProductRegistration(Vsix.Name, Vsix.Description, Vsix.Version)]
+    [ProvideMenuResource("Menus.ctmenu", 1)]
+    [Guid(PackageGuids.SolutionScribeString)]
+    public sealed class SolutionScribePackage : ToolkitPackage
     {
-        await this.RegisterCommandsAsync();
+        protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
+        {
+            await this.RegisterCommandsAsync();
+        }
     }
 }

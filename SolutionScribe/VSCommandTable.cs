@@ -13,11 +13,8 @@ namespace SolutionScribe
     /// </summary>
     internal sealed partial class PackageGuids
     {
-        public const string guidSolutionScribePkgString = "f1a2b3c4-d5e6-7890-abcd-ef1234567890";
-        public static Guid guidSolutionScribePkg = new Guid(guidSolutionScribePkgString);
-
-        public const string guidSolutionScribeCmdSetString = "a1b2c3d4-e5f6-7890-abcd-ef1234567890";
-        public static Guid guidSolutionScribeCmdSet = new Guid(guidSolutionScribeCmdSetString);
+        public const string SolutionScribeString = "c2a25aa6-71a0-4dd6-9974-49f9035e55a2";
+        public static Guid SolutionScribe = new Guid(SolutionScribeString);
     }
 
     /// <summary>
@@ -25,14 +22,7 @@ namespace SolutionScribe
     /// </summary>
     internal sealed partial class PackageIds
     {
-        public const int SolutionScribeMenuGroup = 0x1000;
-        public const int SolutionScribeMenu = 0x1001;
-        public const int SolutionScribeSubMenuGroup = 0x1002;
-        public const int CreateLicenseSubMenu = 0x1003;
-        public const int CreateLicenseSubMenuGroup = 0x1004;
-        public const int CreateMITLicenseCommandId = 0x0104;
-        public const int CreateReadmeCommandId = 0x0101;
-        public const int CreateChangeLogCommandId = 0x0102;
-        public const int CreateContributingCommandId = 0x0103;
+        public const int MyMenuGroup = 0x0001;
+        public const int MyCommand = 0x0100;
     }
 }
