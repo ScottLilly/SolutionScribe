@@ -22,7 +22,7 @@ namespace SolutionScribe
     /// </summary>
     internal sealed partial class PackageIds
     {
-        public const int MyMenuGroup = 0x0001;
+        public const int SolutionScribeMenuGroup = 0x0001;
         public const int MyCommand = 0x0100;
         public const int SubMenuGroup = 0x0101;
         public const int CreateLicenseFileCommand = 0x0200;

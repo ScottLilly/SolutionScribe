@@ -8,7 +8,7 @@
 
   <Commands package="SolutionScribe">
 	  <Groups>
-		  <Group guid="SolutionScribe" id="MyMenuGroup" priority="0x0600">
+		  <Group guid="SolutionScribe" id="SolutionScribeMenuGroup" priority="0x0600">
 			  <Parent guid="VSMainMenu" id="Tools"/>
 		  </Group>
 		  <Group guid="SolutionScribe" id="SubMenuGroup" priority="0x0100">
@@ -20,7 +20,7 @@
 
 	  <Menus>
 		  <Menu guid="SolutionScribe" id="MyCommand" priority="0x0100" type="Menu">
-			  <Parent guid="SolutionScribe" id="MyMenuGroup" />
+			  <Parent guid="SolutionScribe" id="SolutionScribeMenuGroup" />
 			  <Strings>
 				  <ButtonText>Solution Scribe</ButtonText>
 			  </Strings>
@@ -61,7 +61,7 @@
 
 	<Symbols>
 		<GuidSymbol name="SolutionScribe" value="{c2a25aa6-71a0-4dd6-9974-49f9035e55a2}">
-			<IDSymbol name="MyMenuGroup" value="0x0001" />
+			<IDSymbol name="SolutionScribeMenuGroup" value="0x0001" />
 			<IDSymbol name="MyCommand" value="0x0100" />
 			<IDSymbol name="SubMenuGroup" value="0x0101" />
 			<IDSymbol name="CreateLicenseFileCommand" value="0x0200" />
