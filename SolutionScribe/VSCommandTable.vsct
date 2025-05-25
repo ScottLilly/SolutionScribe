@@ -12,14 +12,13 @@
 			  <Parent guid="VSMainMenu" id="Tools"/>
 		  </Group>
 		  <Group guid="SolutionScribe" id="SolutionScribeSubMenuGroup" priority="0x0100">
-			  <Parent guid="SolutionScribe" id="MyCommand"/>
+			  <Parent guid="SolutionScribe" id="SolutionScribeSubMenu"/>
 		  </Group>
 	  </Groups>
 
 	  <!-- Menus -->
-
 	  <Menus>
-		  <Menu guid="SolutionScribe" id="MyCommand" priority="0x0100" type="Menu">
+		  <Menu guid="SolutionScribe" id="SolutionScribeSubMenu" priority="0x0100" type="Menu">
 			  <Parent guid="SolutionScribe" id="SolutionScribeMenuGroup" />
 			  <Strings>
 				  <ButtonText>Solution Scribe</ButtonText>
@@ -62,7 +61,7 @@
 	<Symbols>
 		<GuidSymbol name="SolutionScribe" value="{c2a25aa6-71a0-4dd6-9974-49f9035e55a2}">
 			<IDSymbol name="SolutionScribeMenuGroup" value="0x0001" />
-			<IDSymbol name="MyCommand" value="0x0100" />
+			<IDSymbol name="SolutionScribeSubMenu" value="0x0100" />
 			<IDSymbol name="SolutionScribeSubMenuGroup" value="0x0101" />
 			<IDSymbol name="CreateLicenseFileCommand" value="0x0200" />
 			<IDSymbol name="CreateReadmeFileCommand" value="0x0201" />
@@ -70,4 +69,5 @@
 			<IDSymbol name="CreateChangelogFileCommand" value="0x0203" />
 		</GuidSymbol>
 	</Symbols>
+	
 </CommandTable>
