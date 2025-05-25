@@ -45,8 +45,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Commands\CreateChangelogFileCommand.cs" />
+    <Compile Include="Commands\CreateContributingFileCommand.cs" />
+    <Compile Include="Commands\CreateLicenseFileCommand.cs" />
+    <Compile Include="Commands\CreateReadmeFileCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Commands\MyCommand.cs" />
     <Compile Include="SolutionScribePackage.cs" />
     <Compile Include="source.extension.cs">
       <AutoGen>True</AutoGen>

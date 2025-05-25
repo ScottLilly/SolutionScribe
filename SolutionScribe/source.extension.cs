@@ -9,10 +9,10 @@ namespace SolutionScribe
     internal sealed partial class Vsix
     {
         public const string Id = "SolutionScribe.7b1276f1-14cd-44a0-bd5f-107fc5ec0015";
-        public const string Name = "SolutionScribe";
-        public const string Description = @"Empty VSIX Project.";
+        public const string Name = "Solution Scribe";
+        public const string Description = @"Create LICENSE, README, CONTRIBUTING, and CHANGELOG documents for your solutions.";
         public const string Language = "en-US";
-        public const string Version = "0.1";
+        public const string Version = "0.2";
         public const string Author = "Scott Lilly";
         public const string Tags = "";
         public const bool IsPreview = false;
