@@ -11,7 +11,7 @@
 		  <Group guid="SolutionScribe" id="SolutionScribeMenuGroup" priority="0x0600">
 			  <Parent guid="VSMainMenu" id="Tools"/>
 		  </Group>
-		  <Group guid="SolutionScribe" id="SubMenuGroup" priority="0x0100">
+		  <Group guid="SolutionScribe" id="SolutionScribeSubMenuGroup" priority="0x0100">
 			  <Parent guid="SolutionScribe" id="MyCommand"/>
 		  </Group>
 	  </Groups>
@@ -30,28 +30,28 @@
 	  <!--This section defines the elements the user can interact with, like a menu command or a button or combo box in a toolbar. -->
 	  <Buttons>
 		  <Button guid="SolutionScribe" id="CreateLicenseFileCommand" priority="0x0200" type="Button">
-			  <Parent guid="SolutionScribe" id="SubMenuGroup" />
+			  <Parent guid="SolutionScribe" id="SolutionScribeSubMenuGroup" />
 			  <Strings>
 				  <ButtonText>Create LICENSE file</ButtonText>
 			  </Strings>
 		  </Button>
 
 		  <Button guid="SolutionScribe" id="CreateReadmeFileCommand" priority="0x0201" type="Button">
-			  <Parent guid="SolutionScribe" id="SubMenuGroup" />
+			  <Parent guid="SolutionScribe" id="SolutionScribeSubMenuGroup" />
 			  <Strings>
 				  <ButtonText>Create README file</ButtonText>
 			  </Strings>
 		  </Button>
 
 		  <Button guid="SolutionScribe" id="CreateContributingFileCommand" priority="0x0202" type="Button">
-			  <Parent guid="SolutionScribe" id="SubMenuGroup" />
+			  <Parent guid="SolutionScribe" id="SolutionScribeSubMenuGroup" />
 			  <Strings>
 				  <ButtonText>Create CONTRIBUTING file</ButtonText>
 			  </Strings>
 		  </Button>
 
 		  <Button guid="SolutionScribe" id="CreateChangelogFileCommand" priority="0x0203" type="Button">
-			  <Parent guid="SolutionScribe" id="SubMenuGroup" />
+			  <Parent guid="SolutionScribe" id="SolutionScribeSubMenuGroup" />
 			  <Strings>
 				  <ButtonText>Create CHANGELOG file</ButtonText>
 			  </Strings>
@@ -63,7 +63,7 @@
 		<GuidSymbol name="SolutionScribe" value="{c2a25aa6-71a0-4dd6-9974-49f9035e55a2}">
 			<IDSymbol name="SolutionScribeMenuGroup" value="0x0001" />
 			<IDSymbol name="MyCommand" value="0x0100" />
-			<IDSymbol name="SubMenuGroup" value="0x0101" />
+			<IDSymbol name="SolutionScribeSubMenuGroup" value="0x0101" />
 			<IDSymbol name="CreateLicenseFileCommand" value="0x0200" />
 			<IDSymbol name="CreateReadmeFileCommand" value="0x0201" />
 			<IDSymbol name="CreateContributingFileCommand" value="0x0202" />
