@@ -50,7 +50,6 @@
     <Compile Include="Commands\CreateLicenseFileCommand.cs" />
     <Compile Include="Commands\CreateReadmeFileCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Commands\MyCommand.cs" />
     <Compile Include="SolutionScribePackage.cs" />
     <Compile Include="source.extension.cs">
       <AutoGen>True</AutoGen>
