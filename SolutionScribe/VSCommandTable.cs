@@ -4,30 +4,29 @@
 //     Available from https://marketplace.visualstudio.com/items?itemName=MadsKristensen.VsixSynchronizer64
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace SolutionScribe
+namespace SolutionScribe;
+
+using System;
+
+/// <summary>
+/// Helper class that exposes all GUIDs used across VS Package.
+/// </summary>
+internal sealed partial class PackageGuids
 {
-    using System;
+    public const string SolutionScribeString = "c2a25aa6-71a0-4dd6-9974-49f9035e55a2";
+    public static Guid SolutionScribe = new Guid(SolutionScribeString);
+}
 
-    /// <summary>
-    /// Helper class that exposes all GUIDs used across VS Package.
-    /// </summary>
-    internal sealed partial class PackageGuids
-    {
-        public const string SolutionScribeString = "c2a25aa6-71a0-4dd6-9974-49f9035e55a2";
-        public static Guid SolutionScribe = new Guid(SolutionScribeString);
-    }
-
-    /// <summary>
-    /// Helper class that encapsulates all CommandIDs uses across VS Package.
-    /// </summary>
-    internal sealed partial class PackageIds
-    {
-        public const int SolutionScribeMenuGroup = 0x0001;
-        public const int SolutionScribeSubMenu = 0x0100;
-        public const int SolutionScribeSubMenuGroup = 0x0101;
-        public const int CreateLicenseFileCommand = 0x0200;
-        public const int CreateReadmeFileCommand = 0x0201;
-        public const int CreateContributingFileCommand = 0x0202;
-        public const int CreateChangelogFileCommand = 0x0203;
-    }
+/// <summary>
+/// Helper class that encapsulates all CommandIDs uses across VS Package.
+/// </summary>
+internal sealed partial class PackageIds
+{
+    public const int SolutionScribeMenuGroup = 0x0001;
+    public const int SolutionScribeSubMenu = 0x0100;
+    public const int SolutionScribeSubMenuGroup = 0x0101;
+    public const int CreateLicenseFileCommand = 0x0200;
+    public const int CreateReadmeFileCommand = 0x0201;
+    public const int CreateContributingFileCommand = 0x0202;
+    public const int CreateChangelogFileCommand = 0x0203;
 }

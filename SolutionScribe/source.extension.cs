@@ -4,17 +4,16 @@
 //     Available from https://marketplace.visualstudio.com/items?itemName=MadsKristensen.VsixSynchronizer64
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace SolutionScribe
+namespace SolutionScribe;
+
+internal sealed partial class Vsix
 {
-    internal sealed partial class Vsix
-    {
-        public const string Id = "SolutionScribe.7b1276f1-14cd-44a0-bd5f-107fc5ec0015";
-        public const string Name = "Solution Scribe";
-        public const string Description = @"Create LICENSE, README, CONTRIBUTING, and CHANGELOG documents for your solutions.";
-        public const string Language = "en-US";
-        public const string Version = "0.2";
-        public const string Author = "Scott Lilly";
-        public const string Tags = "";
-        public const bool IsPreview = false;
-    }
+    public const string Id = "SolutionScribe.7b1276f1-14cd-44a0-bd5f-107fc5ec0015";
+    public const string Name = "Solution Scribe";
+    public const string Description = @"Create LICENSE, README, CONTRIBUTING, and CHANGELOG documents for your solutions.";
+    public const string Language = "en-US";
+    public const string Version = "0.2";
+    public const string Author = "Scott Lilly";
+    public const string Tags = "";
+    public const bool IsPreview = false;
 }
