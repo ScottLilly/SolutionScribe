@@ -1,10 +1,17 @@
-﻿namespace SolutionScribe;
+﻿using SolutionScribe.Services;
+
+namespace SolutionScribe;
 
 [Command(PackageIds.CreateChangelogFileCommand)]
-internal sealed class CreateChangelogFileCommand : BaseCommand<CreateChangelogFileCommand>
+internal sealed class CreateChangelogFileCommand : 
+    CreateFileFromTemplateCommandBase<CreateChangelogFileCommand>
 {
-    protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
+    protected override string FileName => "CHANGELOG.md";
+    protected override string TemplateContent => 
+        TempateFileRepository.GetChangelogTemplate();
+
+    protected override async Task OnFileCreatedAsync(string filePath)
     {
-        await VS.MessageBox.ShowAsync("Solution Scribe", "Create CHANGELOG file executed.");
+        await VS.Documents.OpenAsync(filePath);
     }
 }

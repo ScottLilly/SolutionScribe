@@ -29,4 +29,5 @@ internal sealed partial class PackageIds
     public const int CreateReadmeFileCommand = 0x0201;
     public const int CreateContributingFileCommand = 0x0202;
     public const int CreateChangelogFileCommand = 0x0203;
+    public const int CreateCodeOfConductFileCommand = 0x0204;
 }

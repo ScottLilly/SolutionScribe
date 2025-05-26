@@ -1,10 +1,17 @@
-﻿namespace SolutionScribe;
+﻿using SolutionScribe.Services;
+
+namespace SolutionScribe;
 
 [Command(PackageIds.CreateContributingFileCommand)]
-internal sealed class CreateContributingFileCommand : BaseCommand<CreateContributingFileCommand>
+internal sealed class CreateContributingFileCommand : 
+    CreateFileFromTemplateCommandBase<CreateContributingFileCommand>
 {
-    protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
+    protected override string FileName => "CONTRIBUTING.md";
+    protected override string TemplateContent =>
+        TempateFileRepository.GetContributingTemplate();
+
+    protected override async Task OnFileCreatedAsync(string filePath)
     {
-        await VS.MessageBox.ShowAsync("Solution Scribe", "Create CONTRIBUTING file executed.");
+        await VS.Documents.OpenAsync(filePath);
     }
 }
