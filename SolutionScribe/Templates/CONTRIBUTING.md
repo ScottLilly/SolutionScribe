@@ -1,6 +1,6 @@
 ﻿# Contributing to [Your Repository Name]
 
-Thank you for contributing to [Your Repository Name], an open-source C# project! This guide outlines how to contribute effectively, ensuring high-quality code and a collaborative environment. Please read this before submitting contributions.
+Thank you for contributing to [Your Repository Name], an open-source project! This guide outlines how to contribute effectively, ensuring high-quality code and a collaborative environment. Please read this before submitting contributions.
 
 ## Code of Conduct
 
@@ -15,7 +15,7 @@ To contribute, set up the project locally:
 - **Fork the Repository**: Click “Fork” on the repository’s GitHub page to create a copy in your account.
 - **Clone Your Fork**:
   ```bash
-  git clone https://github.com/your-username/[your-repo-name].git
+  git clone https://github.com/[your-user-name]/[your-repo-name].git
   cd [your-repo-name]
   ```
 - **Open the Solution**: Open the `.sln` file in Visual Studio (2022 or later recommended).
@@ -26,9 +26,9 @@ To contribute, set up the project locally:
 
 We use GitHub Issues to track bugs, features, and tasks:
 
-- **Browse Issues**: Visit the [Issues tab](https://github.com/[your-username]/[your-repo-name]/issues) and look for “good first issue” or “help wanted” labels.
+- **Browse Issues**: Visit the [Issues tab](https://github.com/[your-user-name]/[your-repo-name]/issues) and look for “good first issue” or “help wanted” labels.
 - **Create an Issue**: Propose a bug fix or feature by creating an issue using our templates (see [Issue Templates](#issue-templates)).
-- **Wait for Approval**: Only issues in the “Ready for Work” column of our [GitHub Project](https://github.com/[your-username]/[your-repo-name]/projects) are approved for contributions. The repository owner or approved maintainers move issues to this status.
+- **Wait for Approval**: Only issues in the “Ready for Work” column of our [GitHub Project](https://github.com/[your-user-name]/[your-repo-name]/projects) are approved for contributions. The repository owner or approved maintainers move issues to this status.
 
 ### 3. Creating a Pull Request (PR)
 
@@ -51,7 +51,7 @@ All code contributions must be submitted via pull requests:
 - **Link to an Approved Issue**:
   - Your PR must address an issue in “Ready for Work” status. Reference it in the PR description, e.g., `Closes #123`.
 - **Make Changes**:
-  - Follow our [Coding Standards](https://github.com/ScottLilly/CodingStandards/blob/master/CSharp/CSharpStandards.md).
+  - Follow our [Coding Standards](https://github.com/[your-user-name]/CodingStandards/blob/master/[coding-standards-file-name]).
   - Use only Microsoft-provided NuGet packages (e.g., avoid third-party libraries unless approved).
   - Add unit tests for new or changed code using MSTest or xUnit. If the project lacks tests, discuss with maintainers in the issue.
 - **Test Your Changes**:
@@ -74,7 +74,7 @@ All code contributions must be submitted via pull requests:
 
 To create an issue:
 
-- Go to the [Issues tab](https://github.com/[your-username]/[your-repo-name]/issues) and click “New Issue.”
+- Go to the [Issues tab](https://github.com/[your-user-name]/[your-repo-name]/issues) and click “New Issue.”
 - Choose a template (e.g., “Bug Report” or “Feature Request”) and fill out all fields.
 
 Maintainers review issues and move approved ones to “Ready for Work.”
@@ -99,9 +99,9 @@ PRs use a template to describe changes. Include:
 
 All communication happens on GitHub:
 
-- Use the [Issues tab](https://github.com/[your-username]/[your-repo-name]/issues) for questions or discussions.
+- Use the [Issues tab](https://github.com/[your-user-name]/[your-repo-name]/issues) for questions or discussions.
 - Comment on issues or PRs for clarifications.
-- Check [GitHub Discussions](https://github.com/[your-username]/[your-repo-name]/discussions) for broader topics (if enabled).
+- Check [GitHub Discussions](https://github.com/[your-user-name]/[your-repo-name]/discussions) for broader topics (if enabled).
 
 ### 8. Legal
 
