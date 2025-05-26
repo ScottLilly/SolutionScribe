@@ -2,7 +2,6 @@
 
 ## Project Overview
 
-[![License](https://img.shields.io/github/license/ScottLilly/SolutionScribe)](https://github.com/ScottLilly/SolutionScribe/LICENSE)
 
 ## Installation
 Install the VSIX file
