@@ -38,7 +38,7 @@ internal sealed class CreateLicenseFileCommand : BaseCommand<CreateLicenseFileCo
         try
         {
             // Write the LICENSE.txt file to disk
-            File.WriteAllText(licenseFilePath, licenseText);
+            File.WriteAllText(licenseFilePath, licenseText.Trim());
 
             // Check if the file is already part of the solution
             bool fileAlreadyInSolution = false;

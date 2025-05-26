@@ -100,7 +100,7 @@ partial class LicenseDataWindow
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.Location = new System.Drawing.Point(428, 211);
+            this.btnOK.Location = new System.Drawing.Point(428, 121);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(109, 27);
             this.btnOK.TabIndex = 6;
@@ -112,7 +112,7 @@ partial class LicenseDataWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(553, 250);
+            this.ClientSize = new System.Drawing.Size(553, 160);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.tbCopyrightHolder);
             this.Controls.Add(this.tbYears);
@@ -120,6 +120,7 @@ partial class LicenseDataWindow
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "LicenseDataWindow";
             this.Text = "License Data";
             this.ResumeLayout(false);
