@@ -11,20 +11,32 @@ public partial class LicenseDataWindow : Form
     public LicenseDataWindow()
     {
         InitializeComponent();
-
         StartPosition = FormStartPosition.CenterParent;
 
-        // Populate input controls
+        Load += LicenseDataWindow_Load;
+    }
+
+    private async void LicenseDataWindow_Load(object sender, EventArgs e)
+    {
         var licenses = LicenseRepository.GetLicenseDetailsList();
         cboLicenseTypes.DataSource = licenses;
         cboLicenseTypes.DisplayMember = "LicenseName";
 
         tbYears.Text = DateTime.Now.Year.ToString();
+
+        try
+        {
+            tbCopyrightHolder.Text =
+                await SettingsRepository.GetSettingAsync(SettingsRepository.Key.DefaultCopyrightHolder);
+        }
+        catch (Exception ex)
+        {
+            System.Windows.Forms.MessageBox.Show($"Error loading settings: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 
-    private void btnOK_Click(object sender, EventArgs e)
+    private async void btnOK_Click(object sender, EventArgs e)
     {
-        // TODO : Validate the input fields before closing the dialog
         LicenseDetails selectedLicenseDetails = cboLicenseTypes.SelectedItem as LicenseDetails;
 
         if (selectedLicenseDetails == null)
@@ -33,11 +45,20 @@ public partial class LicenseDataWindow : Form
             return;
         }
 
-        // TODO: Populate the license text with the selected license details and user input
+        try
+        {
+            await SettingsRepository.SaveSettingAsync(SettingsRepository.Key.DefaultCopyrightHolder, tbCopyrightHolder.Text);
+        }
+        catch (Exception ex)
+        {
+            System.Windows.Forms.MessageBox.Show($"Error saving settings: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         PopulatedLicenseText = selectedLicenseDetails.LicenseText
             .Replace("<year>", tbYears.Text)
             .Replace("<copyright holder>", tbCopyrightHolder.Text);
 
+        DialogResult = DialogResult.OK;
         Close();
     }
 }
