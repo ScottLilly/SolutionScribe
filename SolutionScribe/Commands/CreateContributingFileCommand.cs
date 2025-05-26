@@ -9,9 +9,4 @@ internal sealed class CreateContributingFileCommand :
     protected override string FileName => "CONTRIBUTING.md";
     protected override string TemplateContent =>
         TempateFileRepository.GetContributingTemplate();
-
-    protected override async Task OnFileCreatedAsync(string filePath)
-    {
-        await VS.Documents.OpenAsync(filePath);
-    }
 }
