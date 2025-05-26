@@ -8,11 +8,6 @@ internal abstract class CreateFileFromTemplateCommandBase<T> : BaseCommand<T> wh
 
     protected abstract string TemplateContent { get; }
 
-    protected virtual Task OnFileCreatedAsync(string filePath)
-    {
-        return Task.CompletedTask;
-    }
-
     protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
     {
         await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
@@ -60,8 +55,6 @@ internal abstract class CreateFileFromTemplateCommandBase<T> : BaseCommand<T> wh
             var solution2 = (EnvDTE80.Solution2)solution;
             var solutionFolder = solution2.AddSolutionFolder("Solution Items");
             solutionFolder.ProjectItems.AddFromFile(targetPath);
-
-            await OnFileCreatedAsync(targetPath);
         }
         catch (Exception ex)
         {
