@@ -1,10 +1,17 @@
-﻿namespace SolutionScribe;
+﻿using SolutionScribe.Services;
+
+namespace SolutionScribe;
 
 [Command(PackageIds.CreateReadmeFileCommand)]
-internal sealed class CreateReadmeFileCommand : BaseCommand<CreateReadmeFileCommand>
+internal sealed class CreateReadmeFileCommand : 
+    CreateFileFromTemplateCommandBase<CreateReadmeFileCommand>
 {
-    protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
+    protected override string FileName => "README.md";
+    protected override string TemplateContent =>
+        TempateFileRepository.GetReadmeTemplate();
+
+    protected override async Task OnFileCreatedAsync(string filePath)
     {
-        await VS.MessageBox.ShowAsync("Solution Scribe", "Create README file executed.");
+        await VS.Documents.OpenAsync(filePath);
     }
 }

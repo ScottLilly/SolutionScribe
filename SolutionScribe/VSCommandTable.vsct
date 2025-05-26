@@ -55,6 +55,13 @@
 				  <ButtonText>Create CHANGELOG file</ButtonText>
 			  </Strings>
 		  </Button>
+
+		  <Button guid="SolutionScribe" id="CreateCodeOfConductFileCommand" priority="0x0204" type="Button">
+			  <Parent guid="SolutionScribe" id="SolutionScribeSubMenuGroup" />
+			  <Strings>
+				  <ButtonText>Create CODE_OF_CONDUCT file</ButtonText>
+			  </Strings>
+		  </Button>
 	  </Buttons>
   </Commands>
 
@@ -67,6 +74,7 @@
 			<IDSymbol name="CreateReadmeFileCommand" value="0x0201" />
 			<IDSymbol name="CreateContributingFileCommand" value="0x0202" />
 			<IDSymbol name="CreateChangelogFileCommand" value="0x0203" />
+			<IDSymbol name="CreateCodeOfConductFileCommand" value="0x0204" />
 		</GuidSymbol>
 	</Symbols>
 	

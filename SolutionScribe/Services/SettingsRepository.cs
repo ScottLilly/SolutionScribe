@@ -22,7 +22,9 @@ internal static class SettingsRepository
     private static async Task EnsureSettingsLoadedAsync()
     {
         if (_settingsCache != null)
+        {
             return;
+        }
 
         if (!Directory.Exists(_appDataFolder))
         {
