@@ -2,7 +2,6 @@
 
 ## Project Overview
 
-![Build Status](https://github.com/ScottLilly/SolutionScribe/actions/workflows/ci.yml/badge.svg)
 [![License](https://img.shields.io/github/license/ScottLilly/SolutionScribe)](https://github.com/ScottLilly/SolutionScribe/LICENSE)
 
 ## Installation
