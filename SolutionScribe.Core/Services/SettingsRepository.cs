@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using SolutionScribe.Core.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -54,7 +54,7 @@ public class SettingsRepository
             Directory.CreateDirectory(folder);
         }
 
-        File.WriteAllText(_settingsFilePath, JsonConvert.SerializeObject(Settings, Formatting.Indented));
+        File.WriteAllText(_settingsFilePath, FlatJson.Write(Settings));
     }
 
     private Dictionary<string, string> LoadSettings()
@@ -66,12 +66,9 @@ public class SettingsRepository
 
         try
         {
-            string json = File.ReadAllText(_settingsFilePath);
-
-            return JsonConvert.DeserializeObject<Dictionary<string, string>>(json)
-                   ?? new Dictionary<string, string>();
+            return FlatJson.Parse(File.ReadAllText(_settingsFilePath));
         }
-        catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException || ex is JsonException)
+        catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException || ex is FormatException)
         {
             // An unreadable or corrupt settings file must not stop the command, but the next save
             // overwrites it, so it goes to the caller rather than being lost silently.

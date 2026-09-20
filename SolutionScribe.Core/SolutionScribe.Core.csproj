@@ -17,9 +17,4 @@
     <EmbeddedResource Include="Templates\**\*.md" />
   </ItemGroup>
 
-  <ItemGroup>
-    <!-- Pinned to the version Visual Studio ships, which the extension binds to at runtime. -->
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-
 </Project>

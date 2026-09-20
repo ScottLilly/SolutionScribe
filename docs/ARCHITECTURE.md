@@ -30,6 +30,17 @@ Two consequences of the boundary:
   `SettingsRepository.DefaultSettingsFilePath` and `ex => ex.Log()`.
 - `netstandard2.0` is the one target the net48 VSIX and a test project can both consume.
 
+## Dependencies
+
+`SolutionScribe.Core` has no package references. An extension shares a process with Visual Studio,
+so a package whose version disagrees with the one VS loads fails at runtime on a machine nobody
+can attach a debugger to, rather than at build time here.
+
+`Json/FlatJson.cs` is there to keep it that way. The settings file is one flat object of string
+values, so reading and writing it by hand is less code than a version conflict would be to
+diagnose. It rejects anything outside that shape, including a number or a nested object, rather
+than converting it.
+
 ## Building and testing
 
 `dotnet build` cannot build the VSIX project: `Microsoft.VSSDK.BuildTools` uses MSBuild tasks that
