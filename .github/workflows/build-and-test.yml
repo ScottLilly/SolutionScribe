@@ -1,15 +1,17 @@
 # Builds the VSIX and runs the tests on a clean machine, which is the thing a local build cannot
 # prove: that nothing depends on something only this working copy has.
 #
-# Manually triggered on purpose. Nobody pushes to this repository but its owner, who has just run
-# the same build locally, so a run on every push would mostly re-prove what is already known. Run
-# it from the Actions tab, or with `gh workflow run build-and-test.yml`, when that is worth having:
-# before tagging a release, after a change to the csproj or the manifest, or when a build behaves
-# differently here than it does locally.
+# Runs on every push to master and on pull requests against it, so the build status is always
+# current. Also available from the Actions tab for a run on a clean machine without pushing
+# anything.
 
 name: Build and Test
 
 on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
   workflow_dispatch:
 
 permissions:
