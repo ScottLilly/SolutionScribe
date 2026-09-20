@@ -3,11 +3,14 @@
     <Metadata>
         <Identity Id="SolutionScribe.7b1276f1-14cd-44a0-bd5f-107fc5ec0015" Version="1.1.0" Language="en-US" Publisher="Scott Lilly" />
         <DisplayName>Solution Scribe</DisplayName>
-        <Description xml:space="preserve">Create LICENSE, CHANGELOG, CODE_OF_CONDUCT, CONTRIBUTING, and README files for your solutions.</Description>
+        <Description xml:space="preserve">Create README, LICENSE, CHANGELOG, CONTRIBUTING, CODE_OF_CONDUCT and SECURITY files, and GitHub issue and pull request templates, for the solution you have open.</Description>
+        <MoreInfo>https://github.com/ScottLilly/SolutionScribe</MoreInfo>
         <License>Documentation\LICENSE.txt</License>
         <GettingStartedGuide>Documentation\GettingStartedGuide.rtf</GettingStartedGuide>
+        <ReleaseNotes>https://github.com/ScottLilly/SolutionScribe/blob/master/CHANGELOG.md</ReleaseNotes>
         <Icon>Resources\Icon.png</Icon>
         <PreviewImage>Resources\Icon.png</PreviewImage>
+        <Tags>documentation, readme, license, changelog, contributing, code of conduct, security, github, solution, scaffolding</Tags>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">

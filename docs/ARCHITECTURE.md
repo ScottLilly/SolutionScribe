@@ -61,7 +61,7 @@ extensions, so `MSBuild.exe` will happily build a stale or hand-edited copy of e
 nothing.
 
 Editing them by hand is therefore sometimes necessary and always temporary: open the solution in
-Visual Studio afterwards and let the tool rewrite them. `VsixVersionTests` fails when
-`source.extension.cs` and the manifest disagree about the version, which is the half of this worth
-catching automatically. Nothing checks the command ids.
+Visual Studio afterwards and let the tool rewrite them. `VsixManifestTests` fails when
+`source.extension.cs` and the manifest disagree on the version, the description or the tags, which
+is the half of this worth catching automatically. Nothing checks the command ids.
 

@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3DD0C483-F
 	ProjectSection(SolutionItems) = preProject
 		docs\ARCHITECTURE.md = docs\ARCHITECTURE.md
 		docs\BACKLOG.md = docs\BACKLOG.md
+		docs\MARKETPLACE.md = docs\MARKETPLACE.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{F7B8EDC9-9BEA-4D2C-9063-B63AC980FF86}"
