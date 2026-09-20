@@ -1,0 +1,44 @@
+###############################################################################
+# Normalize line endings on checkin. Everything Git decides is text gets LF in
+# the repository and native endings in the working tree.
+###############################################################################
+* text=auto
+
+###############################################################################
+# Explicitly text, so a machine with different settings cannot get this wrong.
+###############################################################################
+*.cs        text diff=csharp
+*.csproj    text
+*.slnx      text
+*.props     text
+*.targets   text
+*.xaml      text
+*.json      text
+*.md        text
+*.svg       text
+*.editorconfig text
+*.gitattributes text
+*.gitignore text
+*.ps1       text
+*.yml       text
+*.config    text
+
+###############################################################################
+# Explicitly binary, so Git never tries to normalize or diff them.
+###############################################################################
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.gif       binary
+*.ico       binary
+*.bmp       binary
+*.pdf       binary
+*.zip       binary
+*.ttf       binary
+*.otf       binary
+*.wav       binary
+*.mp3       binary
+*.ogg       binary
+*.dll       binary
+*.exe       binary
+*.snk       binary

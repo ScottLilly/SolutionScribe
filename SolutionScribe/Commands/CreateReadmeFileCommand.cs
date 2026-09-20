@@ -1,6 +1,6 @@
 ﻿using SolutionScribe.Services;
 
-namespace SolutionScribe;
+namespace SolutionScribe.Commands;
 
 [Command(PackageIds.CreateReadmeFileCommand)]
 internal sealed class CreateReadmeFileCommand : 

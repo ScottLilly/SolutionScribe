@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace SolutionScribe;
+namespace SolutionScribe.Commands;
 
 internal abstract class CreateFileFromTemplateCommandBase<T> : BaseCommand<T> where T : BaseCommand<T>, new()
 {

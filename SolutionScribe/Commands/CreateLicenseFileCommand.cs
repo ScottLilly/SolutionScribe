@@ -2,7 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 
-namespace SolutionScribe;
+namespace SolutionScribe.Commands;
 
 [Command(PackageIds.CreateLicenseFileCommand)]
 internal sealed class CreateLicenseFileCommand : BaseCommand<CreateLicenseFileCommand>
