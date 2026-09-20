@@ -1,7 +1,5 @@
 ﻿using SolutionScribe.Core.Services;
 using SolutionScribe.Windows;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SolutionScribe.Commands;
 
@@ -24,23 +22,22 @@ internal sealed class CreateAllDocumentationFilesCommand :
     {
         await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-        var solutionFolder = await SolutionFolder.GetAsync();
+        var solutionDirectory = await SolutionDirectory.GetAsync();
 
-        if (solutionFolder == null)
+        if (solutionDirectory == null)
         {
             return;
         }
 
-        var created = new List<string>();
-        var skipped = new List<string>();
+        var report = new CreatedFilesReport();
 
         // The license is the only file that asks the user anything, so it is settled before
         // anything is written and a cancel there abandons the whole command.
         string? licenseText = null;
 
-        if (solutionFolder.Contains(LICENSE_FILE_NAME))
+        if (solutionDirectory.Contains(LICENSE_FILE_NAME))
         {
-            skipped.Add(LICENSE_FILE_NAME);
+            report.Skipped(LICENSE_FILE_NAME);
         }
         else
         {
@@ -56,20 +53,20 @@ internal sealed class CreateAllDocumentationFilesCommand :
         {
             if (licenseText != null)
             {
-                solutionFolder.Write(LICENSE_FILE_NAME, licenseText);
-                created.Add(LICENSE_FILE_NAME);
+                solutionDirectory.Write(LICENSE_FILE_NAME, licenseText);
+                report.Wrote(LICENSE_FILE_NAME);
             }
 
             foreach (var (fileName, getContent) in s_templateFiles)
             {
-                if (solutionFolder.Contains(fileName))
+                if (solutionDirectory.Contains(fileName))
                 {
-                    skipped.Add(fileName);
+                    report.Skipped(fileName);
                     continue;
                 }
 
-                solutionFolder.Write(fileName, getContent());
-                created.Add(fileName);
+                solutionDirectory.Write(fileName, getContent());
+                report.Wrote(fileName);
             }
         }
         catch (Exception ex)
@@ -78,24 +75,6 @@ internal sealed class CreateAllDocumentationFilesCommand :
             return;
         }
 
-        await VS.StatusBar.ShowMessageAsync(Summarize(created, skipped));
-    }
-
-    private static string Summarize(IList<string> created, IList<string> skipped)
-    {
-        var message = new StringBuilder("Solution Scribe ");
-
-        message.Append(created.Count == 0
-            ? "created nothing"
-            : $"created {string.Join(", ", created)}");
-
-        if (skipped.Count > 0)
-        {
-            message.Append($". Skipped {string.Join(", ", skipped)}, which already existed");
-        }
-
-        message.Append(".");
-
-        return message.ToString();
+        await VS.StatusBar.ShowMessageAsync(report.ToString());
     }
 }

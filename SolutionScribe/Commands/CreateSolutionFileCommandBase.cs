@@ -13,14 +13,14 @@ internal abstract class CreateSolutionFileCommandBase<T> : BaseCommand<T> where 
     {
         await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-        var solutionFolder = await SolutionFolder.GetAsync();
+        var solutionDirectory = await SolutionDirectory.GetAsync();
 
-        if (solutionFolder == null)
+        if (solutionDirectory == null)
         {
             return;
         }
 
-        if (solutionFolder.Contains(FileName) &&
+        if (solutionDirectory.Contains(FileName) &&
             !await VS.MessageBox.ShowConfirmAsync("Solution Scribe",
                 $"{FileName} already exists in the solution folder. Replace it?"))
         {
@@ -36,7 +36,7 @@ internal abstract class CreateSolutionFileCommandBase<T> : BaseCommand<T> where 
 
         try
         {
-            solutionFolder.Write(FileName, content);
+            solutionDirectory.Write(FileName, content);
         }
         catch (Exception ex)
         {
@@ -46,7 +46,7 @@ internal abstract class CreateSolutionFileCommandBase<T> : BaseCommand<T> where 
 
         // Every template needs editing before it is any use, so land the user in the file rather
         // than leaving them to find it in Solution Explorer.
-        await VS.Documents.OpenAsync(solutionFolder.PathOf(FileName));
+        await VS.Documents.OpenAsync(solutionDirectory.PathOf(FileName));
         await VS.StatusBar.ShowMessageAsync($"Solution Scribe created {FileName}.");
     }
 }

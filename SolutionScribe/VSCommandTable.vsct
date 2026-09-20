@@ -81,6 +81,13 @@
 				  <ButtonText>Create SECURITY file</ButtonText>
 			  </Strings>
 		  </Button>
+
+		  <Button guid="SolutionScribe" id="CreateGitHubTemplatesCommand" priority="0x0206" type="Button">
+			  <Parent guid="SolutionScribe" id="SolutionScribeSubMenuGroup" />
+			  <Strings>
+				  <ButtonText>Create GitHub templates</ButtonText>
+			  </Strings>
+		  </Button>
 	  </Buttons>
   </Commands>
 
@@ -96,6 +103,7 @@
 		<VisibilityItem guid="SolutionScribe" id="CreateChangelogFileCommand" context="UICONTEXT_SolutionExists" />
 		<VisibilityItem guid="SolutionScribe" id="CreateCodeOfConductFileCommand" context="UICONTEXT_SolutionExists" />
 		<VisibilityItem guid="SolutionScribe" id="CreateSecurityFileCommand" context="UICONTEXT_SolutionExists" />
+		<VisibilityItem guid="SolutionScribe" id="CreateGitHubTemplatesCommand" context="UICONTEXT_SolutionExists" />
 	</VisibilityConstraints>
 
 	<Symbols>
@@ -111,6 +119,7 @@
 			<IDSymbol name="CreateCodeOfConductFileCommand" value="0x0204" />
 			<IDSymbol name="CreateAllDocumentationFilesCommand" value="0x0205" />
 			<IDSymbol name="CreateSecurityFileCommand" value="0x0206" />
+			<IDSymbol name="CreateGitHubTemplatesCommand" value="0x0207" />
 		</GuidSymbol>
 	</Symbols>
 	

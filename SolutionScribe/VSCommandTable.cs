@@ -33,4 +33,5 @@ internal sealed partial class PackageIds
     public const int CreateCodeOfConductFileCommand = 0x0204;
     public const int CreateAllDocumentationFilesCommand = 0x0205;
     public const int CreateSecurityFileCommand = 0x0206;
+    public const int CreateGitHubTemplatesCommand = 0x0207;
 }

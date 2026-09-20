@@ -29,6 +29,21 @@ public static class TemplateFileRepository
         return LoadEmbeddedDefault("SolutionScribe.Core.Templates.SECURITY.md");
     }
 
+    public static string GetBugReportTemplate()
+    {
+        return LoadEmbeddedDefault("SolutionScribe.Core.Templates.GitHub.bug_report.md");
+    }
+
+    public static string GetFeatureRequestTemplate()
+    {
+        return LoadEmbeddedDefault("SolutionScribe.Core.Templates.GitHub.feature_request.md");
+    }
+
+    public static string GetPullRequestTemplate()
+    {
+        return LoadEmbeddedDefault("SolutionScribe.Core.Templates.GitHub.PULL_REQUEST_TEMPLATE.md");
+    }
+
     private static string LoadEmbeddedDefault(string resourceName)
     {
         var assembly = typeof(TemplateFileRepository).Assembly;

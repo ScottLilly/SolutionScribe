@@ -6,7 +6,9 @@ Visual Studio extension to create documentation files for your solutions.
 
 Solution Scribe can create these files for you: CHANGELOG.md, CODE_OF_CONDUCT.md, CONTRIBUTING.md, LICENSE.txt, README.md, SECURITY.md
 
-The files will be placed in the "Solution Items" folder. The folder will be created if it does not already exist.
+It can also create GitHub's issue and pull request templates: .github\ISSUE_TEMPLATE\bug_report.md, .github\ISSUE_TEMPLATE\feature_request.md, and .github\PULL_REQUEST_TEMPLATE.md
+
+The files will be placed in the "Solution Items" folder. The folder will be created if it does not already exist. The GitHub templates go in a ".github" solution folder instead, matching where they sit on disk.
 
 The available licenses are:
 -	Apache License, Version 2.0
