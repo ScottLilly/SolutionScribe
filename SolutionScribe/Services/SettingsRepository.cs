@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace SolutionScribe.Services;
 
@@ -19,7 +18,7 @@ internal static class SettingsRepository
 
     private static Dictionary<string, string> _settingsCache;
 
-    private static async Task EnsureSettingsLoadedAsync()
+    private static void EnsureSettingsLoaded()
     {
         if (_settingsCache != null)
         {
@@ -50,9 +49,9 @@ internal static class SettingsRepository
         }
     }
 
-    public static async Task SaveSettingAsync(Key key, string value)
+    public static void SaveSetting(Key key, string value)
     {
-        await EnsureSettingsLoadedAsync();
+        EnsureSettingsLoaded();
 
         _settingsCache[key.ToString()] = value;
 
@@ -61,9 +60,9 @@ internal static class SettingsRepository
         File.WriteAllText(_settingsFilePath, json);
     }
 
-    public static async Task<string> GetSettingAsync(Key key, string defaultValue = null)
+    public static string GetSetting(Key key, string defaultValue = null)
     {
-        await EnsureSettingsLoadedAsync();
+        EnsureSettingsLoaded();
 
         return _settingsCache.TryGetValue(key.ToString(), out var value)
             ? value

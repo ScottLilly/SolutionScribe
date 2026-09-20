@@ -16,7 +16,7 @@ public partial class LicenseDataWindow : Form
         Load += LicenseDataWindow_Load;
     }
 
-    private async void LicenseDataWindow_Load(object sender, EventArgs e)
+    private void LicenseDataWindow_Load(object sender, EventArgs e)
     {
         var licenses = LicenseRepository.GetLicenseDetailsList();
         cboLicenseTypes.DataSource = licenses;
@@ -27,7 +27,7 @@ public partial class LicenseDataWindow : Form
         try
         {
             tbCopyrightHolder.Text =
-                await SettingsRepository.GetSettingAsync(SettingsRepository.Key.DefaultCopyrightHolder);
+                SettingsRepository.GetSetting(SettingsRepository.Key.DefaultCopyrightHolder);
         }
         catch (Exception ex)
         {
@@ -35,7 +35,7 @@ public partial class LicenseDataWindow : Form
         }
     }
 
-    private async void btnOK_Click(object sender, EventArgs e)
+    private void btnOK_Click(object sender, EventArgs e)
     {
         LicenseDetails selectedLicenseDetails = cboLicenseTypes.SelectedItem as LicenseDetails;
 
@@ -47,7 +47,7 @@ public partial class LicenseDataWindow : Form
 
         try
         {
-            await SettingsRepository.SaveSettingAsync(SettingsRepository.Key.DefaultCopyrightHolder, tbCopyrightHolder.Text);
+            SettingsRepository.SaveSetting(SettingsRepository.Key.DefaultCopyrightHolder, tbCopyrightHolder.Text);
         }
         catch (Exception ex)
         {

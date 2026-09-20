@@ -3,10 +3,11 @@
 namespace SolutionScribe.Commands;
 
 [Command(PackageIds.CreateReadmeFileCommand)]
-internal sealed class CreateReadmeFileCommand : 
-    CreateFileFromTemplateCommandBase<CreateReadmeFileCommand>
+internal sealed class CreateReadmeFileCommand :
+    CreateSolutionFileCommandBase<CreateReadmeFileCommand>
 {
     protected override string FileName => "README.md";
-    protected override string TemplateContent =>
+
+    protected override string GetContent() =>
         TempateFileRepository.GetReadmeTemplate();
 }
