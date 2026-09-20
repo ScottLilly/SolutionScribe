@@ -1,0 +1,35 @@
+// ShipShapeCode settings for this solution. Comments are allowed: the loader reads JSON with
+// ReadCommentHandling.Skip. Editing this file from inside ShipShapeCode rewrites it and drops them.
+{
+  "Ruleset": "SolutionScribe.shipshaperuleset.json",
+
+  // The shipped defaults, plus the two files VSIX Synchronizer generates. VSCommandTable.cs comes
+  // from VSCommandTable.vsct and source.extension.cs from source.extension.vsixmanifest, so nothing
+  // in either is ours to fix and an edit is undone the next time they are regenerated.
+  "ExcludePaths": [
+    "**/bin/**",
+    "**/obj/**",
+    "**/.git/**",
+    "**/.vs/**",
+    "**/node_modules/**",
+    "**/*.g.cs",
+    "**/*.g.i.cs",
+    "**/*.Designer.cs",
+    "**/*.generated.cs",
+    "**/GlobalUsings.g.cs",
+    "**/AssemblyInfo.cs",
+    "**/Migrations/**",
+    "**/VSCommandTable.cs",
+    "**/source.extension.cs"
+  ],
+
+  // Both are true of this solution by construction rather than by mistake:
+  //   SHIP0207  a VSIX project cannot use the SDK project format. Microsoft.VsSDK.targets and the
+  //             ProjectTypeGuids the VSIX designer needs only exist for the pre-SDK format, which
+  //             is also why dotnet build cannot build this solution and MSBuild.exe is used.
+  //   SHIP0209  nothing references the only project in a single-project solution.
+  "DisabledRules": [
+    "SHIP0207",
+    "SHIP0209"
+  ]
+}

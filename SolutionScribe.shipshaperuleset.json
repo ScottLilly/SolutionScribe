@@ -1,0 +1,44 @@
+// How this solution's code is judged. Only what differs from ShipShapeCode's shipped defaults is
+// stored: AnalysisRuleset.Reconcile fills in everything else from the catalog on load, so a rule
+// added to ShipShapeCode later runs here by default instead of being silently missing.
+//
+// The three settings below exist because the defaults contradict the C# naming standard this code
+// is written to, which is ~/.claude/rules/csharp.md:
+//
+//   private instance field         _camelCase          (already the default)
+//   private static field           s_camelCase
+//   private static readonly field  s_camelCase         (a readonly field is still a field)
+//   const                          UPPER_SNAKE_CASE    (already the default)
+{
+  "Name": "Scott Lilly C# standards",
+  "CodingStandards": {
+    "NamingRules": [
+      {
+        "Kind": "PrivateStaticField",
+        "IsEnabled": true,
+        "Casing": "CamelCase",
+        "Prefix": "s_",
+        "Suffix": "",
+        "Severity": "Medium"
+      },
+      {
+        "Kind": "PrivateStaticReadonlyField",
+        "IsEnabled": true,
+        "Casing": "CamelCase",
+        "Prefix": "s_",
+        "Suffix": "",
+        "Severity": "Low"
+      }
+    ],
+    "Conventions": [
+      {
+        // The default rejected list carries "s_", which this standard requires. "m_" and "g_" stay
+        // rejected, and so does every type prefix.
+        "Convention": "HungarianNotation",
+        "IsEnabled": true,
+        "Severity": "Low",
+        "Value": "str, sz, n, b, arr, obj, lst, dbl, m_, g_"
+      }
+    ]
+  }
+}
