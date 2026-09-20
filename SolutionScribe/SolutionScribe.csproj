@@ -92,6 +92,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <EmbeddedResource Include="Licenses\Apache-2.0.txt" />
+    <EmbeddedResource Include="Licenses\BSD-2-Clause.txt" />
+    <EmbeddedResource Include="Licenses\BSD-3-Clause.txt" />
+    <EmbeddedResource Include="Licenses\CDDL-1.0.txt" />
+    <EmbeddedResource Include="Licenses\EPL-2.0.txt" />
+    <EmbeddedResource Include="Licenses\GPL-2.0-only.txt" />
+    <EmbeddedResource Include="Licenses\GPL-3.0-only.txt" />
+    <EmbeddedResource Include="Licenses\LGPL-2.0-only.txt" />
+    <EmbeddedResource Include="Licenses\LGPL-2.1-only.txt" />
+    <EmbeddedResource Include="Licenses\LGPL-3.0-only.txt" />
+    <EmbeddedResource Include="Licenses\MIT.txt" />
+    <EmbeddedResource Include="Licenses\MPL-2.0.txt" />
     <EmbeddedResource Include="Templates\CHANGELOG.md" />
     <EmbeddedResource Include="Templates\CONTRIBUTING.md" />
     <EmbeddedResource Include="Templates\README.md" />
