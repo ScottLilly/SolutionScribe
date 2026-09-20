@@ -52,7 +52,13 @@ internal abstract class CreateSolutionFileCommandBase<T> : BaseCommand<T> where 
         catch (Exception ex)
         {
             await VS.MessageBox.ShowErrorAsync("Solution Scribe", $"Failed to create {FileName}: {ex.Message}");
+            return;
         }
+
+        // Every template needs editing before it is any use, so land the user in the file rather
+        // than leaving them to find it in Solution Explorer.
+        await VS.Documents.OpenAsync(targetPath);
+        await VS.StatusBar.ShowMessageAsync($"Solution Scribe created {FileName}.");
     }
 
     private void AddToSolutionItems(EnvDTE.Solution solution, string targetPath)
