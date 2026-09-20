@@ -12,8 +12,8 @@ to SolutionScribe.
 
 ```
 SolutionScribe.sln
-  SolutionScribe/            VSIX, extension package, commands, license dialog
-  SolutionScribe.Core/       licenses, templates, settings. No Visual Studio dependency
+  SolutionScribe/            VSIX, extension package, commands, dialogs, options page
+  SolutionScribe.Core/       licenses, templates, placeholders. No Visual Studio dependency
   Tests.SolutionScribe.Core/ MSTest coverage of SolutionScribe.Core
 docs/                        design notes and architecture
 tools/                       scripts and utilities that are not part of the build
@@ -37,10 +37,15 @@ All markdown except this file and `README.md` lives in `docs/`.
 
 ## Settled work leaves no trace
 
-When something is **built**, delete it from `docs/BACKLOG.md` and do not write it up anywhere else.
-No superseded sections, no struck-through questions, no "amended on such a date" banners. The
-documents describe the project as it is now. Git holds the history.
+When something is **built**, the documents describe it as it is now and nothing records that it was
+ever proposed. No superseded sections, no struck-through questions, no "amended on such a date"
+banners. Git holds the history, and the issue that asked for it holds the rest.
 
-When something is **decided against**, delete it from Proposed and leave one brief line under
-`## Decided against` saying why, so it does not get re-proposed. A GitHub issue that is dropped
-is closed as not planned and taken off its milestone, so it does not count as that milestone's work.
+When something is **decided against**, leave one brief line under `## Decided against` in
+`docs/ARCHITECTURE.md` saying what it was and why not, with the reasoning, so it does not get
+re-proposed. Where the decision concerns one member, it goes on that member's doc comment instead,
+because that is what somebody reads before changing it. A GitHub issue that is dropped is closed as
+not planned and taken off its milestone, so it does not count as that milestone's work.
+
+Unbuilt work lives in GitHub Issues. This repository had a `docs/BACKLOG.md` and retired it in
+September 2026; do not reintroduce one.

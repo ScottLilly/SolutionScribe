@@ -1,7 +1,8 @@
 # Marketplace listing
 
 Copy for the Visual Studio Marketplace listing, kept here because the listing is edited in a web
-form that nothing in the repository can see. Update it when the extension gains a command.
+form that nothing in the repository can see. Update it whenever the extension changes what a user
+sees, which is a command, a dialog, a setting, or the Visual Studio versions it installs into.
 
 Nothing here is published yet. See [What is still needed](#what-is-still-needed).
 
@@ -53,12 +54,20 @@ file. Solution Scribe writes them from templates, into the solution you already 
 Each file is written next to your `.sln`, added to the solution's Solution Items folder so it is
 visible in Solution Explorer, and opened in the editor ready to edit.
 
+**The templates come out filled in**, not littered with placeholders. Solution Scribe reads your
+repository name and GitHub user from the solution's git remote and writes the badges, links and
+headings for you. Say the project publishes a NuGet package and README.md gets the package badges
+and install instructions; leave that empty and it is written for an application instead.
+
 The LICENSE command offers seventeen licenses, including everything in GitHub's license picker,
 with each text taken from its canonical version at SPDX. It fills in the copyright year and holder
 for you, remembers the holder you used last time, and tells you when a license has nowhere to put
 them.
 
-Nothing is overwritten without asking.
+Nothing is overwritten without asking. Defaults you reuse, such as your GitHub user and copyright
+holder, are kept under **Tools > Options > Solution Scribe**.
+
+Works in Visual Studio 2022 and Visual Studio 2026.
 
 Free, open source, and the same set of templates the repository uses for itself.
 
@@ -67,10 +76,11 @@ Free, open source, and the same set of templates the repository uses for itself.
 ## What is still needed
 
 - [ ] A real `PreviewImage`. The manifest currently points at the icon, which the Marketplace shows
-      large on the listing page. It wants a screenshot of the menu or the license dialog, at least
+      large on the listing page. It wants a screenshot of the menu or one of the dialogs, at least
       175 x 175.
-- [ ] Screenshots for the listing and for the repository README: the Tools menu, and the license
-      dialog.
+- [ ] Screenshots for the listing and for the repository README: the Tools menu, the license dialog
+      and the project details dialog. Take them in the dark theme as well, now that the dialogs
+      follow it.
 - [ ] Register the publisher as `ScottLilly`, then create the listing and upload the `.vsix`.
 - [ ] Check what the publish form makes the extension name, and set it to `SolutionScribe` if it
       can be set.

@@ -67,6 +67,23 @@ public class VsixManifestTests
         }
     }
 
+    [TestMethod]
+    public void ManifestLinks_Always_PointAtTheRepositoryRatherThanAPackagedFile()
+    {
+        // These three are the elements the schema allows a URL for, and a URL is what they should
+        // be: a copy packaged in the VSIX is a second set of documentation to keep current, and
+        // nothing in the build notices when it falls behind. <License> is not in this list,
+        // because the schema requires that one to be a packaged file.
+        foreach (string element in new[] { "MoreInfo", "ReleaseNotes", "GettingStartedGuide" })
+        {
+            string value = ManifestValue($"<{element}>(.*?)</{element}>");
+
+            StringAssert.StartsWith(value, "https://",
+                $"<{element}> is '{value}'. It should be a link to the repository, not a file " +
+                "shipped inside the VSIX.");
+        }
+    }
+
     #endregion
 
     #region Installation target

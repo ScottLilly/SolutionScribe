@@ -6,7 +6,7 @@
         <Description xml:space="preserve">Create README, LICENSE, CHANGELOG, CONTRIBUTING, CODE_OF_CONDUCT and SECURITY files, and GitHub issue and pull request templates, for the solution you have open.</Description>
         <MoreInfo>https://github.com/ScottLilly/SolutionScribe</MoreInfo>
         <License>Documentation\LICENSE.txt</License>
-        <GettingStartedGuide>Documentation\GettingStartedGuide.rtf</GettingStartedGuide>
+        <GettingStartedGuide>https://github.com/ScottLilly/SolutionScribe#how-to-use</GettingStartedGuide>
         <ReleaseNotes>https://github.com/ScottLilly/SolutionScribe/blob/master/CHANGELOG.md</ReleaseNotes>
         <Icon>Resources\Icon.png</Icon>
         <PreviewImage>Resources\Icon.png</PreviewImage>

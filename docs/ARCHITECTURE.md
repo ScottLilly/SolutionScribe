@@ -1,15 +1,15 @@
 # Architecture
 
 What exists and why it is built this way. Work that is not built yet lives in
-[BACKLOG.md](BACKLOG.md).
+[GitHub Issues](https://github.com/ScottLilly/SolutionScribe/issues).
 
 ## Shape
 
 ```
 SolutionScribe.sln
-  SolutionScribe/            net48            VSIX, extension package, commands, license dialog,
+  SolutionScribe/            net48            VSIX, extension package, commands, dialogs,
                                               options page
-  SolutionScribe.Core/       netstandard2.0   Licenses and templates
+  SolutionScribe.Core/       netstandard2.0   Licenses, templates, and what fills them in
   Tests.SolutionScribe.Core/ net48            MSTest coverage of SolutionScribe.Core, and of
                                               the repository files nothing else checks
 ```
@@ -19,14 +19,15 @@ SolutionScribe.sln
 `SolutionScribe.Core` must not reference `Microsoft.VisualStudio.*`, `EnvDTE`, or
 `Community.VisualStudio.Toolkit`. That is what makes it testable without standing up Visual
 Studio, and everything worth testing is on that side of the line: the license list and its
-embedded texts, the document templates, and placeholder substitution.
+embedded texts, the document templates, placeholder substitution, and reading a GitHub remote out
+of a `.git\config`.
 
 What stays in the VSIX is the part that cannot run outside Visual Studio anyway: the package, the
-commands, the WPF dialog and the options page. It is untested.
+commands, the two WPF dialogs and the options page. It is untested.
 
-The dialog derives from `Microsoft.VisualStudio.PlatformUI.DialogWindow`, which supplies Visual
-Studio's themed dialog styles and its `ShowModal`, so the dialog follows the IDE's theme, font and
-DPI, and is parented to the main window without a helper of its own. Its XAML sets no font, color
+Both dialogs derive from `Microsoft.VisualStudio.PlatformUI.DialogWindow`, which supplies Visual
+Studio's themed dialog styles and its `ShowModal`, so they follow the IDE's theme, font and DPI,
+and are parented to the main window without a helper of their own. Their XAML sets no font, color
 or pixel position; anything it does set comes from a `VsBrushes` key.
 
 One consequence of the boundary: `netstandard2.0` is the one target the net48 VSIX and a test
@@ -42,6 +43,26 @@ Import and Export Settings.
 That puts the settings where Visual Studio keeps everything else, rather than in a file under
 AppData that nothing surfaces. The store is per Visual Studio installation, so a copyright holder
 set in 2022 is not seen by 2026.
+
+## Templates and their placeholders
+
+The files in `SolutionScribe.Core/Templates` are embedded resources, written to disk with their
+placeholders filled in from what the project details dialog asked for.
+
+A placeholder is `<github user>`, `<repository>`, `<nuget package>` or `<security email>`, in the
+same angle bracket form the license texts use for `<year>` and `<copyright holder>`. Square bracket
+text such as `[Say how to install or run this project.]` is an instruction to whoever edits the
+file afterwards, and is left alone on purpose.
+
+Lines between `<!--#if nuget-->` or `<!--#if app-->` and `<!--#endif-->` are kept or dropped
+according to whether a NuGet package name was given, and the markers come out either way. That is
+what lets one README template serve both shapes instead of two templates drifting apart. Blocks do
+not nest, and a condition the extension does not recognize keeps its lines, because silently
+deleting part of someone's template is the worse of the two mistakes.
+
+`ProjectDetails.HasPlaceholders` is what decides whether a command asks anything, so a template
+with nothing to fill in, such as CHANGELOG.md, never shows the dialog. Add a placeholder to a
+template and the prompt follows on its own.
 
 ## Dependencies
 
@@ -72,6 +93,15 @@ with the last release's number.
 
 Nothing else in the repository states a version. `Vsix.Version` in `source.extension.cs` and the
 assembly attributes in `Properties/AssemblyInfo.cs` both derive from the manifest.
+
+## Decided against
+
+Ideas that were considered and rejected, so the same one does not come back around in three months.
+The reasoning travels with the entry: an item reduced to "decided against" gets re-proposed. Where
+an entry concerns one member, it goes on that member's doc comment instead, because that is what
+somebody reads before changing it.
+
+- Nothing yet.
 
 ## Generated files that no command line build regenerates
 

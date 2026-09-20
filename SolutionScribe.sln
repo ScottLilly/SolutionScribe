@@ -22,7 +22,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3DD0C483-F0D7-49E0-BBDD-21113E9CBC63}"
 	ProjectSection(SolutionItems) = preProject
 		docs\ARCHITECTURE.md = docs\ARCHITECTURE.md
-		docs\BACKLOG.md = docs\BACKLOG.md
 		docs\MARKETPLACE.md = docs\MARKETPLACE.md
 	EndProjectSection
 EndProject
