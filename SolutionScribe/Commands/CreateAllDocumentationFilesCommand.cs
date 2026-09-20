@@ -16,7 +16,8 @@ internal sealed class CreateAllDocumentationFilesCommand :
         ("README.md", TemplateFileRepository.GetReadmeTemplate),
         ("CHANGELOG.md", TemplateFileRepository.GetChangelogTemplate),
         ("CONTRIBUTING.md", TemplateFileRepository.GetContributingTemplate),
-        ("CODE_OF_CONDUCT.md", TemplateFileRepository.GetCodeOfConductTemplate)
+        ("CODE_OF_CONDUCT.md", TemplateFileRepository.GetCodeOfConductTemplate),
+        ("SECURITY.md", TemplateFileRepository.GetSecurityTemplate)
     ];
 
     protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)

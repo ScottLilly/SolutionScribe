@@ -24,6 +24,11 @@ public static class TemplateFileRepository
         return LoadEmbeddedDefault("SolutionScribe.Core.Templates.README.md");
     }
 
+    public static string GetSecurityTemplate()
+    {
+        return LoadEmbeddedDefault("SolutionScribe.Core.Templates.SECURITY.md");
+    }
+
     private static string LoadEmbeddedDefault(string resourceName)
     {
         var assembly = typeof(TemplateFileRepository).Assembly;

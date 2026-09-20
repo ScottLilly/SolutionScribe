@@ -52,6 +52,7 @@
     <Compile Include="Commands\CreateContributingFileCommand.cs" />
     <Compile Include="Commands\CreateLicenseFileCommand.cs" />
     <Compile Include="Commands\CreateReadmeFileCommand.cs" />
+    <Compile Include="Commands\CreateSecurityFileCommand.cs" />
     <Compile Include="Commands\CreateSolutionFileCommandBase.cs" />
     <Compile Include="Commands\SolutionFolder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

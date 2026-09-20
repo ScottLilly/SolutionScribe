@@ -30,6 +30,16 @@ public class TemplateFileRepositoryTests
         StringAssert.Contains(TemplateFileRepository.GetReadmeTemplate(), "## Project Overview");
     }
 
+    [TestMethod]
+    public void GetSecurityTemplate_Always_ReturnsTheEmbeddedTemplate()
+    {
+        string template = TemplateFileRepository.GetSecurityTemplate();
+
+        StringAssert.Contains(template, "# Security Policy");
+        StringAssert.Contains(template, "## Supported Versions");
+        StringAssert.Contains(template, "## Reporting a Vulnerability");
+    }
+
     /// <summary>
     /// An empty string is what a missing or misnamed embedded resource returns, so this catches a
     /// template that was renamed without its resource name being updated.
@@ -42,7 +52,8 @@ public class TemplateFileRepositoryTests
             TemplateFileRepository.GetChangelogTemplate(),
             TemplateFileRepository.GetCodeOfConductTemplate(),
             TemplateFileRepository.GetContributingTemplate(),
-            TemplateFileRepository.GetReadmeTemplate()
+            TemplateFileRepository.GetReadmeTemplate(),
+            TemplateFileRepository.GetSecurityTemplate()
         ];
 
         foreach (string template in templates)
