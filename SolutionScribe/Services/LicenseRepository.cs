@@ -29,13 +29,11 @@ internal static class LicenseRepository
 
     internal static List<LicenseDetails> GetLicenseDetailsList() =>
         s_licenses
-            .Select(license => new LicenseDetails
-            {
-                LicenseName = license.Name,
-                SPDXID = license.SpdxId,
-                LicenseUrl = license.Url,
-                LicenseText = LoadEmbeddedText(license.SpdxId)
-            })
+            .Select(license => new LicenseDetails(
+                license.Name,
+                license.SpdxId,
+                license.Url,
+                LoadEmbeddedText(license.SpdxId)))
             .ToList();
 
     private static string LoadEmbeddedText(string spdxId)

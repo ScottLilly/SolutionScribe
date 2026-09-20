@@ -9,7 +9,7 @@ internal sealed class CreateLicenseFileCommand :
 {
     protected override string FileName => "LICENSE.txt";
 
-    protected override string GetContent()
+    protected override string? GetContent()
     {
         var details = new LicenseDataWindow();
 

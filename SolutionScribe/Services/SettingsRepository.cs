@@ -16,15 +16,12 @@ internal static class SettingsRepository
 
     private static readonly string s_settingsFilePath = Path.Combine(s_appDataFolder, "settings.json");
 
-    private static Dictionary<string, string> s_settingsCache;
+    private static Dictionary<string, string>? s_settingsCache;
 
-    private static void EnsureSettingsLoaded()
+    private static Dictionary<string, string> Settings => s_settingsCache ??= LoadSettings();
+
+    private static Dictionary<string, string> LoadSettings()
     {
-        if (s_settingsCache != null)
-        {
-            return;
-        }
-
         if (!Directory.Exists(s_appDataFolder))
         {
             Directory.CreateDirectory(s_appDataFolder);
@@ -32,16 +29,14 @@ internal static class SettingsRepository
 
         if (!File.Exists(s_settingsFilePath))
         {
-            s_settingsCache = [];
-
-            return;
+            return [];
         }
 
         try
         {
             string json = File.ReadAllText(s_settingsFilePath);
 
-            s_settingsCache = JsonConvert.DeserializeObject<Dictionary<string, string>>(json) ?? [];
+            return JsonConvert.DeserializeObject<Dictionary<string, string>>(json) ?? [];
         }
         catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException || ex is JsonException)
         {
@@ -49,26 +44,22 @@ internal static class SettingsRepository
             // overwrites it, so say so in the Extensions output pane rather than losing it silently.
             ex.Log();
 
-            s_settingsCache = [];
+            return [];
         }
     }
 
     public static void SaveSetting(Key key, string value)
     {
-        EnsureSettingsLoaded();
+        Settings[key.ToString()] = value;
 
-        s_settingsCache[key.ToString()] = value;
-
-        string json = JsonConvert.SerializeObject(s_settingsCache, Formatting.Indented);
+        string json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
 
         File.WriteAllText(s_settingsFilePath, json);
     }
 
-    public static string GetSetting(Key key, string defaultValue = null)
+    public static string GetSetting(Key key, string? defaultValue = null)
     {
-        EnsureSettingsLoaded();
-
-        return s_settingsCache.TryGetValue(key.ToString(), out var value)
+        return Settings.TryGetValue(key.ToString(), out var value)
             ? value
             : defaultValue ?? string.Empty;
     }

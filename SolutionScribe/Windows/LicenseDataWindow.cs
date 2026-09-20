@@ -6,7 +6,8 @@ namespace SolutionScribe.Windows;
 
 public partial class LicenseDataWindow : Form
 {
-    internal string PopulatedLicenseText { get; private set; }
+    /// <summary>Empty until the user accepts the dialog.</summary>
+    internal string PopulatedLicenseText { get; private set; } = string.Empty;
 
     public LicenseDataWindow()
     {
@@ -37,9 +38,7 @@ public partial class LicenseDataWindow : Form
 
     private void btnOK_Click(object sender, EventArgs e)
     {
-        LicenseDetails selectedLicenseDetails = cboLicenseTypes.SelectedItem as LicenseDetails;
-
-        if (selectedLicenseDetails == null)
+        if (cboLicenseTypes.SelectedItem is not LicenseDetails selectedLicenseDetails)
         {
             System.Windows.Forms.MessageBox.Show("Please select a license type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;

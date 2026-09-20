@@ -2,8 +2,16 @@
 
 internal class LicenseDetails
 {
-    public string LicenseName { get; init; }
-    public string SPDXID { get; init; }
-    public string LicenseUrl { get; init; }
-    public string LicenseText { get; init; }
+    public LicenseDetails(string licenseName, string spdxId, string licenseUrl, string licenseText)
+    {
+        LicenseName = licenseName;
+        SPDXID = spdxId;
+        LicenseUrl = licenseUrl;
+        LicenseText = licenseText;
+    }
+
+    public string LicenseName { get; }
+    public string SPDXID { get; }
+    public string LicenseUrl { get; }
+    public string LicenseText { get; }
 }
