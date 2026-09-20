@@ -1,0 +1,47 @@
+# Builds the VSIX and runs the tests on a clean machine, which is the thing a local build cannot
+# prove: that nothing depends on something only this working copy has.
+#
+# Manually triggered on purpose. Nobody pushes to this repository but its owner, who has just run
+# the same build locally, so a run on every push would mostly re-prove what is already known. Run
+# it from the Actions tab, or with `gh workflow run build-and-test.yml`, when that is worth having:
+# before tagging a release, after a change to the csproj or the manifest, or when a build behaves
+# differently here than it does locally.
+
+name: Build and Test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+
+      # dotnet build cannot build this solution: the VSIX project uses MSBuild tasks that only
+      # exist on .NET Framework MSBuild, which is what this puts on the PATH.
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v3
+
+      - name: Restore
+        run: msbuild SolutionScribe.sln -t:Restore -p:Configuration=Release
+
+      - name: Build
+        run: msbuild SolutionScribe.sln -p:Configuration=Release
+
+      - name: Test
+        run: dotnet test Tests.SolutionScribe.Core\Tests.SolutionScribe.Core.csproj -c Release --no-build
+
+      # if-no-files-found matters here: a build that stopped producing a VSIX would otherwise be a
+      # green run with nothing in it.
+      - name: Upload the VSIX
+        uses: actions/upload-artifact@v7
+        with:
+          name: SolutionScribe-vsix
+          path: SolutionScribe\bin\Release\SolutionScribe.vsix
+          if-no-files-found: error

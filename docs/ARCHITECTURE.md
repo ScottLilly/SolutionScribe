@@ -89,6 +89,13 @@ only exist on .NET Framework MSBuild. Build the solution with Visual Studio, or 
 `dotnet test Tests.SolutionScribe.Core` works on its own, because neither it nor
 `SolutionScribe.Core` touches the VSSDK.
 
+`.github/workflows/build-and-test.yml` does the same two things on a clean `windows-latest`
+runner and keeps the `.vsix` as an artifact. It runs only when someone starts it, from the Actions
+tab or with `gh workflow run build-and-test.yml`. Nobody pushes here but the repository's owner,
+who has just built locally, so a run per push would mostly re-prove what is already known. It is
+worth starting before tagging a release, after a change to the csproj or the manifest, and any
+time a build behaves differently on a clean machine than it does here.
+
 The test project targets net48 rather than the net10.0 used elsewhere, because Visual Studio 2022
 ships a .NET 9 SDK and cannot build a net10.0 project. Visual Studio 2026 ships a .NET 10 SDK, so
 it can move whenever the solution no longer has to open in 2022.

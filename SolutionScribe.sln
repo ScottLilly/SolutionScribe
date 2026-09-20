@@ -25,6 +25,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3DD0C483-F
 		docs\MARKETPLACE.md = docs\MARKETPLACE.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{1314B6F4-5DDB-4635-A4EF-7D7F0507663D}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build-and-test.yml = .github\workflows\build-and-test.yml
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{F7B8EDC9-9BEA-4D2C-9063-B63AC980FF86}"
 	ProjectSection(SolutionItems) = preProject
 		tools\README.md = tools\README.md
