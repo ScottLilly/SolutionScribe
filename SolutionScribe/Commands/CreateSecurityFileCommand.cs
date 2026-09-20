@@ -12,6 +12,6 @@ internal sealed class CreateSecurityFileCommand :
     {
         ThreadHelper.ThrowIfNotOnUIThread();
 
-        return PopulatedTemplate.For(TemplateFileRepository.GetSecurityTemplate(), solutionDirectory);
+        return PopulatedTemplate.For(TemplateSource.Current.GetSecurityTemplate(), solutionDirectory);
     }
 }

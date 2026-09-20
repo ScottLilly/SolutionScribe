@@ -12,6 +12,6 @@ internal sealed class CreateCodeOfConductFileCommand :
     {
         ThreadHelper.ThrowIfNotOnUIThread();
 
-        return PopulatedTemplate.For(TemplateFileRepository.GetCodeOfConductTemplate(), solutionDirectory);
+        return PopulatedTemplate.For(TemplateSource.Current.GetCodeOfConductTemplate(), solutionDirectory);
     }
 }

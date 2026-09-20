@@ -19,6 +19,11 @@
 		  <Group guid="SolutionScribe" id="SolutionScribeSubMenuGroup" priority="0x0100">
 			  <Parent guid="SolutionScribe" id="SolutionScribeSubMenu"/>
 		  </Group>
+		  <!-- Below the file commands, and separated from them, because it writes into the user's
+		       template folder rather than into the solution. -->
+		  <Group guid="SolutionScribe" id="SolutionScribeTemplatesGroup" priority="0x0200">
+			  <Parent guid="SolutionScribe" id="SolutionScribeSubMenu"/>
+		  </Group>
 	  </Groups>
 
 	  <!-- Menus -->
@@ -88,14 +93,24 @@
 				  <ButtonText>Create GitHub templates</ButtonText>
 			  </Strings>
 		  </Button>
+
+		  <Button guid="SolutionScribe" id="ExportTemplatesCommand" priority="0x0100" type="Button">
+			  <Parent guid="SolutionScribe" id="SolutionScribeTemplatesGroup" />
+			  <Strings>
+				  <ButtonText>Export templates for editing</ButtonText>
+			  </Strings>
+		  </Button>
 	  </Buttons>
   </Commands>
 
-	<!-- Every command writes into the solution folder, so none of them mean anything
-	     without an open solution. Hiding them here rather than graying them out in a
-	     BeforeQueryStatus override lets the shell decide without loading the package. -->
+	<!-- Every command that writes into the solution folder means nothing without an open
+	     solution. Hiding them here rather than graying them out in a BeforeQueryStatus
+	     override lets the shell decide without loading the package.
+
+	     The submenu itself is not constrained, because "Export templates for editing"
+	     writes into the user's template folder and is worth reaching with no solution
+	     open. That is also why the submenu never ends up empty. -->
 	<VisibilityConstraints>
-		<VisibilityItem guid="SolutionScribe" id="SolutionScribeSubMenu" context="UICONTEXT_SolutionExists" />
 		<VisibilityItem guid="SolutionScribe" id="CreateAllDocumentationFilesCommand" context="UICONTEXT_SolutionExists" />
 		<VisibilityItem guid="SolutionScribe" id="CreateLicenseFileCommand" context="UICONTEXT_SolutionExists" />
 		<VisibilityItem guid="SolutionScribe" id="CreateReadmeFileCommand" context="UICONTEXT_SolutionExists" />
@@ -112,6 +127,7 @@
 			<IDSymbol name="SolutionScribeSubMenu" value="0x0100" />
 			<IDSymbol name="SolutionScribeSubMenuGroup" value="0x0101" />
 			<IDSymbol name="SolutionScribeAllFilesGroup" value="0x0102" />
+			<IDSymbol name="SolutionScribeTemplatesGroup" value="0x0103" />
 			<IDSymbol name="CreateLicenseFileCommand" value="0x0200" />
 			<IDSymbol name="CreateReadmeFileCommand" value="0x0201" />
 			<IDSymbol name="CreateContributingFileCommand" value="0x0202" />
@@ -120,6 +136,7 @@
 			<IDSymbol name="CreateAllDocumentationFilesCommand" value="0x0205" />
 			<IDSymbol name="CreateSecurityFileCommand" value="0x0206" />
 			<IDSymbol name="CreateGitHubTemplatesCommand" value="0x0207" />
+			<IDSymbol name="ExportTemplatesCommand" value="0x0208" />
 		</GuidSymbol>
 	</Symbols>
 	

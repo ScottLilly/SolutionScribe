@@ -34,8 +34,9 @@ finding a license text, getting the copyright line right, and remembering what b
 CONTRIBUTING file. Solution Scribe writes them from templates, into the solution you already have
 open, without leaving Visual Studio.
 
-The commands live under **Tools > Solution Scribe**. They appear only when a solution is open,
-because every one of them writes into the solution folder.
+The commands live under **Tools > Solution Scribe**. The ones that write into the solution folder
+appear only when a solution is open. **Export templates for editing** is always there, because it
+writes into your own template folder instead.
 
 ## Installation
 
@@ -59,6 +60,7 @@ Open a solution, then pick a command from **Tools > Solution Scribe**:
 | Create CODE_OF_CONDUCT file | `CODE_OF_CONDUCT.md` |
 | Create SECURITY file | `SECURITY.md` |
 | Create GitHub templates | The three files under `.github\` |
+| Export templates for editing | The built-in templates, into your template folder |
 
 Every file is written into the solution folder, next to the `.sln`, and added to the solution's
 **Solution Items** folder so it is visible in Solution Explorer. That folder is created if it is
@@ -80,6 +82,21 @@ copyright line, such as the GNU and Mozilla ones, disable those two fields and s
 
 A command that writes one file asks before replacing a file that is already there. The two
 commands that write several leave existing files alone and say which ones they skipped.
+
+## Using your own templates
+
+The built-in templates encode one person's process, so you will probably want to change them.
+
+**Export templates for editing** writes the built-in templates into your template folder, which is
+`%AppData%\Solution Scribe\Templates` unless you change it under Tools > Options > Solution Scribe.
+It never overwrites a file that is already there, and it opens the folder when it is done.
+
+Edit any of them and Solution Scribe uses your copy instead. Delete one and it goes back to the
+built-in version, so you only have to keep the ones you actually changed. Your templates get the
+same treatment as the built-in ones: `<github user>`, `<repository>`, `<nuget package>` and
+`<security email>` are filled in, and `<!--#if nuget-->` and `<!--#if app-->` blocks are kept or
+dropped to match the project. Anything in `[square brackets]` is left alone for you to edit
+afterwards.
 
 ## Requirements
 

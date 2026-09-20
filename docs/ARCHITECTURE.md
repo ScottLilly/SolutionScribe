@@ -49,6 +49,15 @@ set in 2022 is not seen by 2026.
 The files in `SolutionScribe.Core/Templates` are embedded resources, written to disk with their
 placeholders filled in from what the project details dialog asked for.
 
+Each one is a default the user can override. `TemplateFileRepository` is constructed with a
+template folder, taken from Tools > Options, and a file of the same relative path there wins over
+the embedded resource. `TemplatePaths` is the list of those relative paths, and the layout matches
+the embedded resources, so `GitHub\bug_report.md` is both where the user's copy goes and what names
+the resource. A user file that exists and can be read is used as it stands, empty or not; anything
+else, including a folder that does not exist or a locked file, falls back to the default rather
+than failing the command. Add a template and it needs a row in `TemplatePaths`, or nobody can
+override it and the export command will not write it out.
+
 A placeholder is `<github user>`, `<repository>`, `<nuget package>` or `<security email>`, in the
 same angle bracket form the license texts use for `<year>` and `<copyright holder>`. Square bracket
 text such as `[Say how to install or run this project.]` is an instruction to whoever edits the

@@ -56,8 +56,10 @@
     <Compile Include="Commands\CreateGitHubTemplatesCommand.cs" />
     <Compile Include="Commands\CreateSolutionFileCommandBase.cs" />
     <Compile Include="Commands\CreatedFilesReport.cs" />
+    <Compile Include="Commands\ExportTemplatesCommand.cs" />
     <Compile Include="Commands\PopulatedTemplate.cs" />
     <Compile Include="Commands\SolutionDirectory.cs" />
+    <Compile Include="Commands\TemplateSource.cs" />
     <Compile Include="Options\GeneralOptions.cs" />
     <Compile Include="Options\OptionsProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

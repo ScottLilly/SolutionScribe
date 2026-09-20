@@ -11,11 +11,11 @@ internal sealed class CreateGitHubTemplatesCommand :
 {
     // GitHub reads these from .github\ in the repository root, which for these solutions is the
     // solution directory. The names are GitHub's, not ours, and cannot be changed.
-    private static readonly (string RelativePath, Func<string> GetContent)[] s_templates =
+    private static readonly (string RelativePath, Func<TemplateFileRepository, string> GetContent)[] s_templates =
     [
-        (@".github\ISSUE_TEMPLATE\bug_report.md", TemplateFileRepository.GetBugReportTemplate),
-        (@".github\ISSUE_TEMPLATE\feature_request.md", TemplateFileRepository.GetFeatureRequestTemplate),
-        (@".github\PULL_REQUEST_TEMPLATE.md", TemplateFileRepository.GetPullRequestTemplate)
+        (@".github\ISSUE_TEMPLATE\bug_report.md", templates => templates.GetBugReportTemplate()),
+        (@".github\ISSUE_TEMPLATE\feature_request.md", templates => templates.GetFeatureRequestTemplate()),
+        (@".github\PULL_REQUEST_TEMPLATE.md", templates => templates.GetPullRequestTemplate())
     ];
 
     protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
@@ -31,6 +31,7 @@ internal sealed class CreateGitHubTemplatesCommand :
 
         var report = new CreatedFilesReport();
         var pending = new List<(string RelativePath, string Template)>();
+        var templates = TemplateSource.Current;
 
         foreach (var (relativePath, getContent) in s_templates)
         {
@@ -40,7 +41,7 @@ internal sealed class CreateGitHubTemplatesCommand :
                 continue;
             }
 
-            pending.Add((relativePath, getContent()));
+            pending.Add((relativePath, getContent(templates)));
         }
 
         ProjectDetails? projectDetails = null;

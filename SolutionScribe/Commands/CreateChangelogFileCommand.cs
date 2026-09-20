@@ -12,6 +12,6 @@ internal sealed class CreateChangelogFileCommand :
     {
         ThreadHelper.ThrowIfNotOnUIThread();
 
-        return PopulatedTemplate.For(TemplateFileRepository.GetChangelogTemplate(), solutionDirectory);
+        return PopulatedTemplate.For(TemplateSource.Current.GetChangelogTemplate(), solutionDirectory);
     }
 }

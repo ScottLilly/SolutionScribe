@@ -26,6 +26,7 @@ internal sealed partial class PackageIds
     public const int SolutionScribeSubMenu = 0x0100;
     public const int SolutionScribeSubMenuGroup = 0x0101;
     public const int SolutionScribeAllFilesGroup = 0x0102;
+    public const int SolutionScribeTemplatesGroup = 0x0103;
     public const int CreateLicenseFileCommand = 0x0200;
     public const int CreateReadmeFileCommand = 0x0201;
     public const int CreateContributingFileCommand = 0x0202;
@@ -34,4 +35,5 @@ internal sealed partial class PackageIds
     public const int CreateAllDocumentationFilesCommand = 0x0205;
     public const int CreateSecurityFileCommand = 0x0206;
     public const int CreateGitHubTemplatesCommand = 0x0207;
+    public const int ExportTemplatesCommand = 0x0208;
 }

@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Support for Visual Studio 2026. The extension installs into both Visual Studio 2022 and Visual Studio 2026.
-- A Tools > Options > Solution Scribe page, holding the default copyright holder, the GitHub user and the security contact address.
+- Your own templates. Put a file in your template folder, `%AppData%\Solution Scribe\Templates` unless you change it under Tools > Options, and it is used instead of the built-in one. Anything you have not copied falls back to the built-in template.
+- "Export templates for editing", which writes the built-in templates into that folder to start from, leaves alone anything already there, and opens the folder. It is the one command that does not need an open solution.
+- A Tools > Options > Solution Scribe page, holding the default copyright holder, the GitHub user, the security contact address and the template folder.
 - The templates are filled in rather than written with their placeholders intact. A dialog asks for the repository name, GitHub user, NuGet package name and security contact address, taking the repository name and user from the solution's git remote when it has one. A command writing several files asks once, and a template with nothing to fill in does not ask.
 - README.md is written for an application or for a NuGet package, depending on whether a package name was given, instead of carrying commented-out alternatives for both.
 - "Create all documentation files", which writes every file in one pass and leaves alone the ones that are already there.

@@ -12,6 +12,6 @@ internal sealed class CreateContributingFileCommand :
     {
         ThreadHelper.ThrowIfNotOnUIThread();
 
-        return PopulatedTemplate.For(TemplateFileRepository.GetContributingTemplate(), solutionDirectory);
+        return PopulatedTemplate.For(TemplateSource.Current.GetContributingTemplate(), solutionDirectory);
     }
 }

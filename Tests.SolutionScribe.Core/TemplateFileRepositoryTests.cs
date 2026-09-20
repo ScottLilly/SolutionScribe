@@ -1,64 +1,74 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SolutionScribe.Core.Models;
 using SolutionScribe.Core.Services;
+using System;
+using System.IO;
+using System.Linq;
 
 namespace Tests.SolutionScribe.Core;
 
 [TestClass]
 public class TemplateFileRepositoryTests
 {
+    /// <summary>A repository with no user template folder, so every answer is an embedded default.</summary>
+    private static TemplateFileRepository Embedded() => new TemplateFileRepository();
+
+    #region Embedded defaults
+
     [TestMethod]
     public void GetChangelogTemplate_Always_ReturnsTheEmbeddedTemplate()
     {
-        StringAssert.Contains(TemplateFileRepository.GetChangelogTemplate(), "# Changelog");
+        StringAssert.Contains(Embedded().GetChangelogTemplate(), "# Changelog");
     }
 
     [TestMethod]
     public void GetCodeOfConductTemplate_Always_ReturnsTheEmbeddedTemplate()
     {
-        StringAssert.Contains(TemplateFileRepository.GetCodeOfConductTemplate(), "# Code of Conduct");
+        StringAssert.Contains(Embedded().GetCodeOfConductTemplate(), "# Code of Conduct");
     }
 
     [TestMethod]
     public void GetContributingTemplate_Always_ReturnsTheEmbeddedTemplate()
     {
-        StringAssert.Contains(TemplateFileRepository.GetContributingTemplate(), "# Contributing");
+        StringAssert.Contains(Embedded().GetContributingTemplate(), "# Contributing");
     }
 
     [TestMethod]
     public void GetReadmeTemplate_Always_ReturnsTheEmbeddedTemplate()
     {
-        StringAssert.Contains(TemplateFileRepository.GetReadmeTemplate(), "## Project Overview");
+        StringAssert.Contains(Embedded().GetReadmeTemplate(), "## Project Overview");
     }
 
     [TestMethod]
     public void GetSecurityTemplate_Always_ReturnsTheEmbeddedTemplate()
     {
-        string template = TemplateFileRepository.GetSecurityTemplate();
+        string template = Embedded().GetSecurityTemplate();
 
         StringAssert.Contains(template, "# Security Policy");
         StringAssert.Contains(template, "## Supported Versions");
         StringAssert.Contains(template, "## Reporting a Vulnerability");
     }
 
+    #endregion
+
     #region GitHub templates
 
     [TestMethod]
     public void GetBugReportTemplate_Always_ReturnsTheEmbeddedTemplate()
     {
-        StringAssert.Contains(TemplateFileRepository.GetBugReportTemplate(), "name: Bug report");
+        StringAssert.Contains(Embedded().GetBugReportTemplate(), "name: Bug report");
     }
 
     [TestMethod]
     public void GetFeatureRequestTemplate_Always_ReturnsTheEmbeddedTemplate()
     {
-        StringAssert.Contains(TemplateFileRepository.GetFeatureRequestTemplate(), "name: Feature request");
+        StringAssert.Contains(Embedded().GetFeatureRequestTemplate(), "name: Feature request");
     }
 
     [TestMethod]
     public void GetPullRequestTemplate_Always_ReturnsTheEmbeddedTemplate()
     {
-        string template = TemplateFileRepository.GetPullRequestTemplate();
+        string template = Embedded().GetPullRequestTemplate();
 
         StringAssert.Contains(template, "## Summary");
         StringAssert.Contains(template, "## Linked issue");
@@ -75,8 +85,8 @@ public class TemplateFileRepositoryTests
     public void IssueTemplates_Always_StartWithYamlFrontMatter(string which)
     {
         string template = which == "bug report"
-            ? TemplateFileRepository.GetBugReportTemplate()
-            : TemplateFileRepository.GetFeatureRequestTemplate();
+            ? Embedded().GetBugReportTemplate()
+            : Embedded().GetFeatureRequestTemplate();
 
         StringAssert.StartsWith(template, "---");
         StringAssert.Contains(template, "about:");
@@ -85,19 +95,142 @@ public class TemplateFileRepositoryTests
 
     #endregion
 
+    #region User templates
+
+    [TestMethod]
+    public void GetTemplate_AUserCopyOfTheTemplate_ReturnsItInsteadOfTheEmbeddedOne()
+    {
+        using var folder = new TemporaryFolder();
+
+        folder.Write("README.md", "My own README template.");
+
+        Assert.AreEqual("My own README template.", folder.Repository().GetReadmeTemplate());
+    }
+
+    [TestMethod]
+    public void GetTemplate_AUserCopyInTheGitHubSubfolder_ReturnsIt()
+    {
+        using var folder = new TemporaryFolder();
+
+        folder.Write(@"GitHub\bug_report.md", "My own bug report template.");
+
+        Assert.AreEqual("My own bug report template.", folder.Repository().GetBugReportTemplate());
+    }
+
+    [TestMethod]
+    public void GetTemplate_NoUserCopyOfThatTemplate_FallsBackToTheEmbeddedOne()
+    {
+        using var folder = new TemporaryFolder();
+
+        folder.Write("README.md", "My own README template.");
+
+        // Overriding one template must not take the others with it.
+        StringAssert.Contains(folder.Repository().GetChangelogTemplate(), "# Changelog");
+    }
+
+    [TestMethod]
+    public void GetTemplate_ATemplateFolderThatDoesNotExist_FallsBackToTheEmbeddedTemplates()
+    {
+        string missing = Path.Combine(Path.GetTempPath(), $"SolutionScribeTests-{Guid.NewGuid():N}");
+
+        StringAssert.Contains(new TemplateFileRepository(missing).GetReadmeTemplate(), "## Project Overview");
+    }
+
+    [TestMethod]
+    public void GetTemplate_NoTemplateFolderSet_ReturnsTheEmbeddedTemplates()
+    {
+        foreach (string? folder in new[] { null, "", "   " })
+        {
+            StringAssert.Contains(new TemplateFileRepository(folder).GetReadmeTemplate(), "## Project Overview");
+        }
+    }
+
+    [TestMethod]
+    public void GetTemplate_AFolderWhereTheTemplateShouldBe_FallsBackToTheEmbeddedTemplate()
+    {
+        using var folder = new TemporaryFolder();
+
+        Directory.CreateDirectory(Path.Combine(folder.Path, "README.md"));
+
+        StringAssert.Contains(folder.Repository().GetReadmeTemplate(), "## Project Overview");
+    }
+
+    [TestMethod]
+    public void GetTemplate_AnEmptyUserTemplate_ReturnsItRatherThanTheEmbeddedOne()
+    {
+        // Second-guessing what somebody put in their own template is worse than writing it.
+        using var folder = new TemporaryFolder();
+
+        folder.Write("CHANGELOG.md", string.Empty);
+
+        Assert.AreEqual(string.Empty, folder.Repository().GetChangelogTemplate());
+    }
+
+    [TestMethod]
+    public void GetEmbeddedTemplate_AUserCopyOfTheTemplate_StillReturnsTheEmbeddedOne()
+    {
+        // This is what the export command writes out, so it has to ignore what is already there.
+        using var folder = new TemporaryFolder();
+
+        folder.Write("README.md", "My own README template.");
+
+        StringAssert.Contains(TemplateFileRepository.GetEmbeddedTemplate("README.md"), "## Project Overview");
+    }
+
+    [TestMethod]
+    public void UserTemplateFolder_AFolderHoldingEnvironmentVariables_IsExpanded()
+    {
+        var repository = new TemplateFileRepository(@"%AppData%\Solution Scribe\Templates");
+
+        Assert.IsFalse(repository.UserTemplateFolder.Contains("%"));
+        StringAssert.StartsWith(repository.UserTemplateFolder,
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+    }
+
+    [TestMethod]
+    public void TemplatePaths_Always_NameEveryTemplateTheRepositoryCanReturn()
+    {
+        // The export command writes one file per entry, so a template missing from this list is a
+        // template nobody can override.
+        Assert.AreEqual(8, TemplateFileRepository.TemplatePaths.Count);
+
+        foreach (string relativePath in TemplateFileRepository.TemplatePaths)
+        {
+            Assert.IsFalse(string.IsNullOrWhiteSpace(TemplateFileRepository.GetEmbeddedTemplate(relativePath)),
+                $"'{relativePath}' names no embedded resource, so the export command would write an empty file.");
+        }
+    }
+
+    [TestMethod]
+    public void TemplatePaths_Always_AreWhatTheNamedMethodsReturn()
+    {
+        var byPath = TemplateFileRepository.TemplatePaths
+            .Select(TemplateFileRepository.GetEmbeddedTemplate)
+            .ToArray();
+
+        CollectionAssert.AreEquivalent(AllTemplates(), byPath);
+    }
+
+    #endregion
+
     #region Placeholders
 
-    private static string[] AllTemplates() =>
-    [
-        TemplateFileRepository.GetChangelogTemplate(),
-        TemplateFileRepository.GetCodeOfConductTemplate(),
-        TemplateFileRepository.GetContributingTemplate(),
-        TemplateFileRepository.GetReadmeTemplate(),
-        TemplateFileRepository.GetSecurityTemplate(),
-        TemplateFileRepository.GetBugReportTemplate(),
-        TemplateFileRepository.GetFeatureRequestTemplate(),
-        TemplateFileRepository.GetPullRequestTemplate()
-    ];
+    private static string[] AllTemplates()
+    {
+        var templates = Embedded();
+
+        return
+        [
+            templates.GetChangelogTemplate(),
+            templates.GetCodeOfConductTemplate(),
+            templates.GetContributingTemplate(),
+            templates.GetReadmeTemplate(),
+            templates.GetSecurityTemplate(),
+            templates.GetBugReportTemplate(),
+            templates.GetFeatureRequestTemplate(),
+            templates.GetPullRequestTemplate()
+        ];
+    }
 
     /// <summary>
     /// Every shipped template has to be fully populated by <see cref="ProjectDetails"/>, in both
@@ -154,17 +287,7 @@ public class TemplateFileRepositoryTests
     [TestMethod]
     public void AllTemplates_Always_AreNonEmptyAndDistinct()
     {
-        string[] templates =
-        [
-            TemplateFileRepository.GetChangelogTemplate(),
-            TemplateFileRepository.GetCodeOfConductTemplate(),
-            TemplateFileRepository.GetContributingTemplate(),
-            TemplateFileRepository.GetReadmeTemplate(),
-            TemplateFileRepository.GetSecurityTemplate(),
-            TemplateFileRepository.GetBugReportTemplate(),
-            TemplateFileRepository.GetFeatureRequestTemplate(),
-            TemplateFileRepository.GetPullRequestTemplate()
-        ];
+        string[] templates = AllTemplates();
 
         foreach (string template in templates)
         {
@@ -172,5 +295,39 @@ public class TemplateFileRepositoryTests
         }
 
         CollectionAssert.AllItemsAreUnique(templates);
+    }
+
+    /// <summary>
+    /// A template folder under the temp directory, deleted when the test is done with it.
+    /// </summary>
+    private sealed class TemporaryFolder : IDisposable
+    {
+        public TemporaryFolder()
+        {
+            Path = System.IO.Path.Combine(
+                System.IO.Path.GetTempPath(), $"SolutionScribeTests-{Guid.NewGuid():N}");
+
+            Directory.CreateDirectory(Path);
+        }
+
+        public string Path { get; }
+
+        public TemplateFileRepository Repository() => new TemplateFileRepository(Path);
+
+        public void Write(string relativePath, string content)
+        {
+            string fullPath = System.IO.Path.Combine(Path, relativePath);
+
+            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(fullPath));
+            File.WriteAllText(fullPath, content);
+        }
+
+        public void Dispose()
+        {
+            if (Directory.Exists(Path))
+            {
+                Directory.Delete(Path, true);
+            }
+        }
     }
 }

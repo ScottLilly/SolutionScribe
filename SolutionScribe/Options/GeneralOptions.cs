@@ -26,4 +26,14 @@ public class GeneralOptions : BaseOptionModel<GeneralOptions>
     [Description("The address SECURITY.md tells people to email about a vulnerability.")]
     [DefaultValue("")]
     public string DefaultSecurityEmail { get; set; } = string.Empty;
+
+    [Category("Templates")]
+    [DisplayName("Template folder")]
+    [Description("Where Solution Scribe looks for your own copies of the templates. A file here is used instead of the built-in one; anything missing falls back to the built-in. Tools > Solution Scribe > Export templates for editing writes the built-in ones here to start from. Environment variables are expanded. Empty means the built-in templates only.")]
+    [DefaultValue(DEFAULT_TEMPLATE_FOLDER)]
+    public string TemplateFolder { get; set; } = DEFAULT_TEMPLATE_FOLDER;
+
+    // Left unexpanded so the value means the same thing on another machine when it travels through
+    // Import and Export Settings.
+    private const string DEFAULT_TEMPLATE_FOLDER = @"%AppData%\Solution Scribe\Templates";
 }

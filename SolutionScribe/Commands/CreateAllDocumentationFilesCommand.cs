@@ -11,13 +11,13 @@ internal sealed class CreateAllDocumentationFilesCommand :
 {
     private const string LICENSE_FILE_NAME = "LICENSE.txt";
 
-    private static readonly (string FileName, Func<string> GetContent)[] s_templateFiles =
+    private static readonly (string FileName, Func<TemplateFileRepository, string> GetContent)[] s_templateFiles =
     [
-        ("README.md", TemplateFileRepository.GetReadmeTemplate),
-        ("CHANGELOG.md", TemplateFileRepository.GetChangelogTemplate),
-        ("CONTRIBUTING.md", TemplateFileRepository.GetContributingTemplate),
-        ("CODE_OF_CONDUCT.md", TemplateFileRepository.GetCodeOfConductTemplate),
-        ("SECURITY.md", TemplateFileRepository.GetSecurityTemplate)
+        ("README.md", templates => templates.GetReadmeTemplate()),
+        ("CHANGELOG.md", templates => templates.GetChangelogTemplate()),
+        ("CONTRIBUTING.md", templates => templates.GetContributingTemplate()),
+        ("CODE_OF_CONDUCT.md", templates => templates.GetCodeOfConductTemplate()),
+        ("SECURITY.md", templates => templates.GetSecurityTemplate())
     ];
 
     protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
@@ -36,6 +36,7 @@ internal sealed class CreateAllDocumentationFilesCommand :
         // Everything the user is asked is settled before anything is written, so a cancel at
         // either dialog abandons the whole command rather than leaving half the files behind.
         var pending = new List<(string FileName, string Template)>();
+        var templates = TemplateSource.Current;
 
         foreach (var (fileName, getContent) in s_templateFiles)
         {
@@ -45,7 +46,7 @@ internal sealed class CreateAllDocumentationFilesCommand :
                 continue;
             }
 
-            pending.Add((fileName, getContent()));
+            pending.Add((fileName, getContent(templates)));
         }
 
         ProjectDetails? projectDetails = null;

@@ -12,6 +12,6 @@ internal sealed class CreateReadmeFileCommand :
     {
         ThreadHelper.ThrowIfNotOnUIThread();
 
-        return PopulatedTemplate.For(TemplateFileRepository.GetReadmeTemplate(), solutionDirectory);
+        return PopulatedTemplate.For(TemplateSource.Current.GetReadmeTemplate(), solutionDirectory);
     }
 }
