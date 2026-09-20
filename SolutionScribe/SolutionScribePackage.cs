@@ -10,6 +10,8 @@ namespace SolutionScribe;
 [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
 [InstalledProductRegistration(Vsix.Name, Vsix.Description, Vsix.Version)]
 [ProvideMenuResource("Menus.ctmenu", 1)]
+[ProvideOptionPage(typeof(Options.OptionsProvider.GeneralOptionsPage),
+    "Solution Scribe", "General", 0, 0, true, SupportsProfiles = true)]
 [Guid(PackageGuids.SolutionScribeString)]
 public sealed class SolutionScribePackage : ToolkitPackage
 {

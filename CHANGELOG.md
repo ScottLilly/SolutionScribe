@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Support for Visual Studio 2026. The extension installs into both Visual Studio 2022 and Visual Studio 2026.
+- A Tools > Options > Solution Scribe page, holding the default copyright holder, which used to be settable only through the license dialog.
 - "Create all documentation files", which writes every file in one pass and leaves alone the ones that are already there.
 - "Create SECURITY file", and a SECURITY.md template covering supported versions and how to report a vulnerability privately.
 - "Create GitHub templates", which writes `.github\ISSUE_TEMPLATE\bug_report.md`, `.github\ISSUE_TEMPLATE\feature_request.md` and `.github\PULL_REQUEST_TEMPLATE.md`.
@@ -16,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - The license dialog follows the Visual Studio theme, font and DPI. Dark theme users no longer get a white dialog.
+- Settings live in the Visual Studio settings store, and travel through Import and Export Settings, rather than in a JSON file under AppData. A copyright holder saved by an earlier build is not carried over.
 - The license dialog is modal to Visual Studio, so it can no longer end up behind the IDE.
 - The copyright year and holder fields are disabled, with a note saying why, for licenses whose text has nowhere to put them. They used to accept input and then ignore it.
 - The license list no longer accepts typed text that matches nothing.

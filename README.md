@@ -67,9 +67,9 @@ where they sit on disk. The new file then opens in the editor, because every tem
 editing before it is any use.
 
 **Create LICENSE file** asks which license you want, along with the copyright year and holder. It
-remembers the copyright holder you used last time and fills it in for you. Licenses whose text has
-nowhere to put a copyright line, such as the GNU and Mozilla ones, disable those two fields and
-say so.
+remembers the copyright holder you used last time and fills it in for you, and you can set it
+yourself under Tools > Options > Solution Scribe. Licenses whose text has nowhere to put a
+copyright line, such as the GNU and Mozilla ones, disable those two fields and say so.
 
 A command that writes one file asks before replacing a file that is already there. The two
 commands that write several leave existing files alone and say which ones they skipped.

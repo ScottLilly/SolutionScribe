@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.PlatformUI;
 using SolutionScribe.Core.Models;
 using SolutionScribe.Core.Services;
+using SolutionScribe.Options;
 using System.Windows;
 // Community.VisualStudio.Toolkit, which is a global using, has a MessageBox and a
 // SelectionChangedEventArgs of its own.
@@ -11,9 +12,6 @@ namespace SolutionScribe.Windows;
 
 public partial class LicenseDataWindow : DialogWindow
 {
-    private readonly SettingsRepository _settings =
-        new SettingsRepository(SettingsRepository.DefaultSettingsFilePath, ex => ex.Log());
-
     /// <summary>Empty until the user accepts the dialog.</summary>
     private string _populatedLicenseText = string.Empty;
 
@@ -45,16 +43,7 @@ public partial class LicenseDataWindow : DialogWindow
         LicenseTypes.SelectedIndex = 0;
 
         CopyrightYears.Text = DateTime.Now.Year.ToString();
-
-        try
-        {
-            CopyrightHolder.Text =
-                _settings.GetSetting(SettingsRepository.Key.DefaultCopyrightHolder);
-        }
-        catch (Exception ex)
-        {
-            ShowError($"Error loading settings: {ex.Message}");
-        }
+        CopyrightHolder.Text = GeneralOptions.Instance.DefaultCopyrightHolder;
     }
 
     private void LicenseTypes_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -88,14 +77,10 @@ public partial class LicenseDataWindow : DialogWindow
             return;
         }
 
-        try
-        {
-            _settings.SaveSetting(SettingsRepository.Key.DefaultCopyrightHolder, CopyrightHolder.Text);
-        }
-        catch (Exception ex)
-        {
-            ShowError($"Error saving settings: {ex.Message}");
-        }
+        var options = GeneralOptions.Instance;
+
+        options.DefaultCopyrightHolder = CopyrightHolder.Text;
+        options.Save();
 
         _populatedLicenseText =
             selectedLicenseDetails.PopulateText(CopyrightYears.Text, CopyrightHolder.Text);

@@ -90,7 +90,7 @@ PRs use a template to describe changes. Include:
 
 - **Adding a license**: put the canonical text from [SPDX](https://spdx.org/licenses/) in `SolutionScribe.Core/Licenses/<spdx-id>.txt`, rename the copyright holder token to `<copyright holder>`, and add a row to `LicenseRepository`. The embedded resource is picked up automatically, and the tests check that the list and the files agree.
 - **Adding a template**: put it in `SolutionScribe.Core/Templates/`, add a method to `TemplateFileRepository`, and add a command deriving from `CreateSolutionFileCommandBase`.
-- **Dependencies**: think hard before adding one. An extension shares a process with Visual Studio, so a package version that disagrees with the one VS loads is a runtime failure rather than a build error, on a machine you cannot debug. `SolutionScribe.Core` has no package references at all, and `FlatJson` exists to keep it that way.
+- **Dependencies**: think hard before adding one. An extension shares a process with Visual Studio, so a package version that disagrees with the one VS loads is a runtime failure rather than a build error, on a machine you cannot debug. `SolutionScribe.Core` has no package references at all, and everything it has needed so far has been a few lines of its own code instead.
 - **Generated files**: `source.extension.cs` and `VSCommandTable.cs` are written by VSIX Synchronizer from the manifest and the `.vsct`. Edit the source files, not the generated ones, and open the solution in Visual Studio so the tool regenerates them.
 - **Documentation**: update the README or `docs/` when a change affects what the extension does.
 - **Commit Messages**: use clear messages, e.g., `Fix: Resolve null reference in auth module`.

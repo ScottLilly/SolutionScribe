@@ -7,8 +7,9 @@ What exists and why it is built this way. Work that is not built yet lives in
 
 ```
 SolutionScribe.sln
-  SolutionScribe/            net48            VSIX, extension package, commands, license dialog
-  SolutionScribe.Core/       netstandard2.0   Licenses, templates, settings
+  SolutionScribe/            net48            VSIX, extension package, commands, license dialog,
+                                              options page
+  SolutionScribe.Core/       netstandard2.0   Licenses and templates
   Tests.SolutionScribe.Core/ net48            MSTest coverage of SolutionScribe.Core, and of
                                               the repository files nothing else checks
 ```
@@ -18,33 +19,36 @@ SolutionScribe.sln
 `SolutionScribe.Core` must not reference `Microsoft.VisualStudio.*`, `EnvDTE`, or
 `Community.VisualStudio.Toolkit`. That is what makes it testable without standing up Visual
 Studio, and everything worth testing is on that side of the line: the license list and its
-embedded texts, the document templates, placeholder substitution, and the settings file.
+embedded texts, the document templates, and placeholder substitution.
 
 What stays in the VSIX is the part that cannot run outside Visual Studio anyway: the package, the
-commands, and the WPF dialog. It is untested.
+commands, the WPF dialog and the options page. It is untested.
 
 The dialog derives from `Microsoft.VisualStudio.PlatformUI.DialogWindow`, which supplies Visual
 Studio's themed dialog styles and its `ShowModal`, so the dialog follows the IDE's theme, font and
 DPI, and is parented to the main window without a helper of its own. Its XAML sets no font, color
 or pixel position; anything it does set comes from a `VsBrushes` key.
 
-Two consequences of the boundary:
+One consequence of the boundary: `netstandard2.0` is the one target the net48 VSIX and a test
+project can both consume.
 
-- `SettingsRepository` takes its file path and an error callback rather than reading a static
-  AppData path and logging to the Visual Studio output pane itself. The dialog passes
-  `SettingsRepository.DefaultSettingsFilePath` and `ex => ex.Log()`.
-- `netstandard2.0` is the one target the net48 VSIX and a test project can both consume.
+## Settings
+
+`Options/GeneralOptions.cs` derives from the Community toolkit's `BaseOptionModel<T>`, which reads
+and writes the Visual Studio settings store. `ProvideOptionPage` on the package registers it as
+Tools > Options > Solution Scribe > General, with `SupportsProfiles` so the values travel through
+Import and Export Settings.
+
+That puts the settings where Visual Studio keeps everything else, rather than in a file under
+AppData that nothing surfaces. The store is per Visual Studio installation, so a copyright holder
+set in 2022 is not seen by 2026.
 
 ## Dependencies
 
 `SolutionScribe.Core` has no package references. An extension shares a process with Visual Studio,
 so a package whose version disagrees with the one VS loads fails at runtime on a machine nobody
-can attach a debugger to, rather than at build time here.
-
-`Json/FlatJson.cs` is there to keep it that way. The settings file is one flat object of string
-values, so reading and writing it by hand is less code than a version conflict would be to
-diagnose. It rejects anything outside that shape, including a number or a nested object, rather
-than converting it.
+can attach a debugger to, rather than at build time here. Keep it that way: everything Core needs
+so far has been a few lines of its own code.
 
 ## Building and testing
 
