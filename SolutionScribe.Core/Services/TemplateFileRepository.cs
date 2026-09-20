@@ -36,9 +36,11 @@ public class TemplateFileRepository
     /// </param>
     public TemplateFileRepository(string? userTemplateFolder = null)
     {
-        UserTemplateFolder = string.IsNullOrWhiteSpace(userTemplateFolder)
+        string folder = userTemplateFolder?.Trim() ?? string.Empty;
+
+        UserTemplateFolder = folder.Length == 0
             ? string.Empty
-            : Environment.ExpandEnvironmentVariables(userTemplateFolder.Trim());
+            : Environment.ExpandEnvironmentVariables(folder);
     }
 
     /// <summary>The folder searched for the user's own copies, expanded. Empty when there is none.</summary>

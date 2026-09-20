@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Support for Visual Studio 2026. The extension installs into both Visual Studio 2022 and Visual Studio 2026.
+- The commands on the solution node's right-click menu in Solution Explorer, as well as under Tools. "Export templates for editing" stays on the Tools menu only, since it does not act on the solution.
 - Your own templates. Put a file in your template folder, `%AppData%\Solution Scribe\Templates` unless you change it under Tools > Options, and it is used instead of the built-in one. Anything you have not copied falls back to the built-in template.
 - "Export templates for editing", which writes the built-in templates into that folder to start from, leaves alone anything already there, and opens the folder. It is the one command that does not need an open solution.
 - A Tools > Options > Solution Scribe page, holding the default copyright holder, the GitHub user, the security contact address and the template folder.

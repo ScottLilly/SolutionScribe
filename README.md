@@ -34,9 +34,11 @@ finding a license text, getting the copyright line right, and remembering what b
 CONTRIBUTING file. Solution Scribe writes them from templates, into the solution you already have
 open, without leaving Visual Studio.
 
-The commands live under **Tools > Solution Scribe**. The ones that write into the solution folder
-appear only when a solution is open. **Export templates for editing** is always there, because it
-writes into your own template folder instead.
+The commands live under **Tools > Solution Scribe**, and on the **right-click menu of the solution
+node** in Solution Explorer, which is where you are when you want them. The ones that write into
+the solution folder appear on the Tools menu only when a solution is open. **Export templates for
+editing** is always on the Tools menu, and is not on the solution's context menu, because it writes
+into your own template folder rather than into the solution.
 
 ## Installation
 
@@ -48,7 +50,8 @@ A Visual Studio Marketplace listing is not published yet. A link will go here wh
 
 ## How to use
 
-Open a solution, then pick a command from **Tools > Solution Scribe**:
+Open a solution, then pick a command from **Tools > Solution Scribe**, or from **Solution Scribe**
+on the solution node's right-click menu:
 
 | Command | Writes |
 |---|---|
