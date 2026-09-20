@@ -24,6 +24,13 @@ internal abstract class CreateFileFromTemplateCommandBase<T> : BaseCommand<T> wh
         string solutionDir = Path.GetDirectoryName(solution.FullName);
         string targetPath = Path.Combine(solutionDir, FileName);
 
+        if (File.Exists(targetPath) &&
+            !await VS.MessageBox.ShowConfirmAsync("Solution Scribe",
+                $"{FileName} already exists in the solution folder. Replace it?"))
+        {
+            return;
+        }
+
         try
         {
             File.WriteAllText(targetPath, TemplateContent);

@@ -9,18 +9,6 @@ internal sealed class CreateLicenseFileCommand : BaseCommand<CreateLicenseFileCo
 {
     protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
     {
-        var details = new LicenseDataWindow();
-
-        if (details.ShowDialog() != DialogResult.OK)
-        {
-            return;
-        }
-
-        await CreateLicenseFileAsync(details.PopulatedLicenseText);
-    }
-
-    private async Task CreateLicenseFileAsync(string licenseText)
-    {
         await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
         var dte = await VS.GetServiceAsync<EnvDTE.DTE, EnvDTE.DTE>();
@@ -34,6 +22,27 @@ internal sealed class CreateLicenseFileCommand : BaseCommand<CreateLicenseFileCo
 
         string solutionDir = Path.GetDirectoryName(solution.FullName);
         string licenseFilePath = Path.Combine(solutionDir, "LICENSE.txt");
+
+        if (File.Exists(licenseFilePath) &&
+            !await VS.MessageBox.ShowConfirmAsync("Solution Scribe",
+                "LICENSE.txt already exists in the solution folder. Replace it?"))
+        {
+            return;
+        }
+
+        var details = new LicenseDataWindow();
+
+        if (details.ShowDialog() != DialogResult.OK)
+        {
+            return;
+        }
+
+        await CreateLicenseFileAsync(solution, licenseFilePath, details.PopulatedLicenseText);
+    }
+
+    private async Task CreateLicenseFileAsync(EnvDTE.Solution solution, string licenseFilePath, string licenseText)
+    {
+        await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
         try
         {

@@ -12,7 +12,7 @@ namespace SolutionScribe
         public const string Name = "Solution Scribe";
         public const string Description = @"Create LICENSE, CHANGELOG, CODE_OF_CONDUCT, CONTRIBUTING, and README files for your solutions.";
         public const string Language = "en-US";
-        public const string Version = "1.0.0";
+        public const string Version = "1.1.0";
         public const string Author = "Scott Lilly";
         public const string Tags = "";
         public const bool IsPreview = false;
