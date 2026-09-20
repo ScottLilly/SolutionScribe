@@ -1,13 +1,13 @@
-﻿using SolutionScribe.Models;
+﻿using SolutionScribe.Core.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace SolutionScribe.Services;
+namespace SolutionScribe.Core.Services;
 
-internal static class LicenseRepository
+public static class LicenseRepository
 {
-    private const string RESOURCE_PREFIX = "SolutionScribe.Licenses.";
+    private const string RESOURCE_PREFIX = "SolutionScribe.Core.Licenses.";
 
     // The SPDX id is also the name of the embedded text file, so each text can be
     // diffed against the canonical version at https://spdx.org/licenses/ .
@@ -27,7 +27,7 @@ internal static class LicenseRepository
         ("The MIT License", "MIT", "https://opensource.org/license/mit")
     ];
 
-    internal static List<LicenseDetails> GetLicenseDetailsList() =>
+    public static List<LicenseDetails> GetLicenseDetailsList() =>
         s_licenses
             .Select(license => new LicenseDetails(
                 license.Name,

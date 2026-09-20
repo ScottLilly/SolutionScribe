@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- netstandard2.0 is the one target consumable by both the net48 VSIX and a net10.0 test
+         project. SolutionScribe.Core must never reference anything under Microsoft.VisualStudio.*
+         or EnvDTE, because that is what keeps it testable without Visual Studio. -->
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>SolutionScribe.Core</RootNamespace>
+    <AssemblyName>SolutionScribe.Core</AssemblyName>
+    <ProjectGuid>{3637049D-F752-4BC5-AE9F-D3149808ECF2}</ProjectGuid>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Licenses\*.txt" />
+    <EmbeddedResource Include="Templates\*.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Pinned to the version Visual Studio ships, which the extension binds to at runtime. -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+</Project>

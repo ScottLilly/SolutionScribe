@@ -1,4 +1,4 @@
-﻿using SolutionScribe.Services;
+﻿using SolutionScribe.Core.Services;
 
 namespace SolutionScribe.Commands;
 

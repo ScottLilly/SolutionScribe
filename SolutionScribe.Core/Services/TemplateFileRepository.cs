@@ -1,27 +1,27 @@
 ﻿using System.IO;
 
-namespace SolutionScribe.Services;
+namespace SolutionScribe.Core.Services;
 
-internal static class TemplateFileRepository
+public static class TemplateFileRepository
 {
     public static string GetChangelogTemplate()
     {
-        return LoadEmbeddedDefault("SolutionScribe.Templates.CHANGELOG.md");
+        return LoadEmbeddedDefault("SolutionScribe.Core.Templates.CHANGELOG.md");
     }
 
     public static string GetCodeOfConductTemplate()
     {
-        return LoadEmbeddedDefault("SolutionScribe.Templates.CODE_OF_CONDUCT.md");
+        return LoadEmbeddedDefault("SolutionScribe.Core.Templates.CODE_OF_CONDUCT.md");
     }
 
     public static string GetContributingTemplate()
     {
-        return LoadEmbeddedDefault("SolutionScribe.Templates.CONTRIBUTING.md");
+        return LoadEmbeddedDefault("SolutionScribe.Core.Templates.CONTRIBUTING.md");
     }
 
     public static string GetReadmeTemplate()
     {
-        return LoadEmbeddedDefault("SolutionScribe.Templates.README.md");
+        return LoadEmbeddedDefault("SolutionScribe.Core.Templates.README.md");
     }
 
     private static string LoadEmbeddedDefault(string resourceName)

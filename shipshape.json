@@ -27,7 +27,7 @@
   //   SHIP0207  a VSIX project cannot use the SDK project format. Microsoft.VsSDK.targets and the
   //             ProjectTypeGuids the VSIX designer needs only exist for the pre-SDK format, which
   //             is also why dotnet build cannot build this solution and MSBuild.exe is used.
-  //   SHIP0209  nothing references the only project in a single-project solution.
+  //   SHIP0209  the VSIX and the test project are both entry points, so nothing references them.
   "DisabledRules": [
     "SHIP0207",
     "SHIP0209"

@@ -1,11 +1,14 @@
-﻿using SolutionScribe.Models;
-using SolutionScribe.Services;
+﻿using SolutionScribe.Core.Models;
+using SolutionScribe.Core.Services;
 using System.Windows.Forms;
 
 namespace SolutionScribe.Windows;
 
 public partial class LicenseDataWindow : Form
 {
+    private readonly SettingsRepository _settings =
+        new SettingsRepository(SettingsRepository.DefaultSettingsFilePath, ex => ex.Log());
+
     /// <summary>Empty until the user accepts the dialog.</summary>
     internal string PopulatedLicenseText { get; private set; } = string.Empty;
 
@@ -28,7 +31,7 @@ public partial class LicenseDataWindow : Form
         try
         {
             tbCopyrightHolder.Text =
-                SettingsRepository.GetSetting(SettingsRepository.Key.DefaultCopyrightHolder);
+                _settings.GetSetting(SettingsRepository.Key.DefaultCopyrightHolder);
         }
         catch (Exception ex)
         {
@@ -46,16 +49,15 @@ public partial class LicenseDataWindow : Form
 
         try
         {
-            SettingsRepository.SaveSetting(SettingsRepository.Key.DefaultCopyrightHolder, tbCopyrightHolder.Text);
+            _settings.SaveSetting(SettingsRepository.Key.DefaultCopyrightHolder, tbCopyrightHolder.Text);
         }
         catch (Exception ex)
         {
             System.Windows.Forms.MessageBox.Show($"Error saving settings: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        PopulatedLicenseText = selectedLicenseDetails.LicenseText
-            .Replace("<year>", tbYears.Text)
-            .Replace("<copyright holder>", tbCopyrightHolder.Text);
+        PopulatedLicenseText =
+            selectedLicenseDetails.PopulateText(tbYears.Text, tbCopyrightHolder.Text);
 
         DialogResult = DialogResult.OK;
         Close();

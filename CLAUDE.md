@@ -12,10 +12,15 @@ to SolutionScribe.
 
 ```
 SolutionScribe.sln
-  SolutionScribe/           VSIX, extension package and commands
-docs/                       design notes and architecture
-tools/                      scripts and utilities that are not part of the build
+  SolutionScribe/            VSIX, extension package, commands, license dialog
+  SolutionScribe.Core/       licenses, templates, settings. No Visual Studio dependency
+  Tests.SolutionScribe.Core/ MSTest coverage of SolutionScribe.Core
+docs/                        design notes and architecture
+tools/                       scripts and utilities that are not part of the build
 ```
+
+`dotnet build` cannot build the VSIX project. Build the solution with `MSBuild.exe -restore` from
+a Visual Studio install, and run `dotnet test Tests.SolutionScribe.Core` on its own.
 
 All markdown except this file and `README.md` lives in `docs/`.
 

@@ -52,11 +52,7 @@
     <Compile Include="Commands\CreateLicenseFileCommand.cs" />
     <Compile Include="Commands\CreateReadmeFileCommand.cs" />
     <Compile Include="Commands\CreateSolutionFileCommandBase.cs" />
-    <Compile Include="Models\LicenseDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\LicenseRepository.cs" />
-    <Compile Include="Services\SettingsRepository.cs" />
-    <Compile Include="Services\TemplateFileRepository.cs" />
     <Compile Include="SolutionScribePackage.cs" />
     <Compile Include="source.extension.cs">
       <AutoGen>True</AutoGen>
@@ -93,22 +89,19 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <EmbeddedResource Include="Licenses\Apache-2.0.txt" />
-    <EmbeddedResource Include="Licenses\BSD-2-Clause.txt" />
-    <EmbeddedResource Include="Licenses\BSD-3-Clause.txt" />
-    <EmbeddedResource Include="Licenses\CDDL-1.0.txt" />
-    <EmbeddedResource Include="Licenses\EPL-2.0.txt" />
-    <EmbeddedResource Include="Licenses\GPL-2.0-only.txt" />
-    <EmbeddedResource Include="Licenses\GPL-3.0-only.txt" />
-    <EmbeddedResource Include="Licenses\LGPL-2.0-only.txt" />
-    <EmbeddedResource Include="Licenses\LGPL-2.1-only.txt" />
-    <EmbeddedResource Include="Licenses\LGPL-3.0-only.txt" />
-    <EmbeddedResource Include="Licenses\MIT.txt" />
-    <EmbeddedResource Include="Licenses\MPL-2.0.txt" />
-    <EmbeddedResource Include="Templates\CHANGELOG.md" />
-    <EmbeddedResource Include="Templates\CONTRIBUTING.md" />
-    <EmbeddedResource Include="Templates\README.md" />
-    <EmbeddedResource Include="Templates\CODE_OF_CONDUCT.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SolutionScribe.Core\SolutionScribe.Core.csproj">
+      <Project>{3637049D-F752-4BC5-AE9F-D3149808ECF2}</Project>
+      <Name>SolutionScribe.Core</Name>
+      <!--
+        The default output groups leave a referenced project's PDB out of the VSIX, so without
+        DebugSymbolsProjectOutputGroup a stack trace from SolutionScribe.Core has no line numbers,
+        which is where the logic worth diagnosing actually lives. The rest of the list is the VSSDK
+        default and has to be repeated, because naming any group replaces the whole set.
+      -->
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup;BuiltProjectOutputGroupDependencies;GetCopyToOutputDirectoryItems;SatelliteDllsProjectOutputGroup;DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <VSCTCompile Include="VSCommandTable.vsct">
@@ -131,7 +124,6 @@
     <PackageReference Include="Community.VisualStudio.VSCT" Version="16.0.29.6" PrivateAssets="all" />
     <PackageReference Include="Community.VisualStudio.Toolkit.17" Version="17.0.451" ExcludeAssets="Runtime" />
     <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.0.5232" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Windows\LicenseDataWindow.resx">

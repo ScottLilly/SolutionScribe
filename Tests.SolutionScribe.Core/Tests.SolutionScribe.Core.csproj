@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- net48 rather than the net10.0 the other repos use, because Visual Studio 2022 ships a .NET
+         9 SDK and cannot build a net10.0 project, and this solution has to open in the same
+         Visual Studio that builds the VSIX. It can move once the extension supports VS 2026. -->
+    <TargetFramework>net48</TargetFramework>
+    <RootNamespace>Tests.SolutionScribe.Core</RootNamespace>
+    <AssemblyName>Tests.SolutionScribe.Core</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.9.0" />
+    <PackageReference Include="MSTest" Version="4.4.0" />
+    <PackageReference Include="coverlet.collector" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SolutionScribe.Core\SolutionScribe.Core.csproj" />
+  </ItemGroup>
+
+</Project>
