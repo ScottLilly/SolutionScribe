@@ -65,6 +65,18 @@
 	  </Buttons>
   </Commands>
 
+	<!-- Every command writes into the solution folder, so none of them mean anything
+	     without an open solution. Hiding them here rather than graying them out in a
+	     BeforeQueryStatus override lets the shell decide without loading the package. -->
+	<VisibilityConstraints>
+		<VisibilityItem guid="SolutionScribe" id="SolutionScribeSubMenu" context="UICONTEXT_SolutionExists" />
+		<VisibilityItem guid="SolutionScribe" id="CreateLicenseFileCommand" context="UICONTEXT_SolutionExists" />
+		<VisibilityItem guid="SolutionScribe" id="CreateReadmeFileCommand" context="UICONTEXT_SolutionExists" />
+		<VisibilityItem guid="SolutionScribe" id="CreateContributingFileCommand" context="UICONTEXT_SolutionExists" />
+		<VisibilityItem guid="SolutionScribe" id="CreateChangelogFileCommand" context="UICONTEXT_SolutionExists" />
+		<VisibilityItem guid="SolutionScribe" id="CreateCodeOfConductFileCommand" context="UICONTEXT_SolutionExists" />
+	</VisibilityConstraints>
+
 	<Symbols>
 		<GuidSymbol name="SolutionScribe" value="{c2a25aa6-71a0-4dd6-9974-49f9035e55a2}">
 			<IDSymbol name="SolutionScribeMenuGroup" value="0x0001" />
