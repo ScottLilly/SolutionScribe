@@ -1,7 +1,7 @@
 ﻿# Code of Conduct
 
 ## Our Pledge
-We am committed to making these projects a welcoming and productive environment for everyone. We value respectful and constructive collaboration.
+We are committed to making this project a welcoming and productive environment for everyone. We value respectful and constructive collaboration.
 
 ## Expected Behavior
 - Be respectful and professional in all interactions.
