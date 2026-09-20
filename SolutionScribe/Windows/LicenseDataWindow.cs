@@ -12,7 +12,22 @@ public partial class LicenseDataWindow : Form
         new SettingsRepository(SettingsRepository.DefaultSettingsFilePath, ex => ex.Log());
 
     /// <summary>Empty until the user accepts the dialog.</summary>
-    internal string PopulatedLicenseText { get; private set; } = string.Empty;
+    private string PopulatedLicenseText { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Shows the dialog and returns the license text with the year and copyright holder filled in,
+    /// or null if the user canceled. Must be called on the UI thread.
+    /// </summary>
+    internal static string? AskForLicenseText()
+    {
+        ThreadHelper.ThrowIfNotOnUIThread();
+
+        using var dialog = new LicenseDataWindow();
+
+        return VisualStudioModalDialog.Show(dialog) == DialogResult.OK
+            ? dialog.PopulatedLicenseText.Trim()
+            : null;
+    }
 
     public LicenseDataWindow()
     {

@@ -25,9 +25,11 @@ internal sealed partial class PackageIds
     public const int SolutionScribeMenuGroup = 0x0001;
     public const int SolutionScribeSubMenu = 0x0100;
     public const int SolutionScribeSubMenuGroup = 0x0101;
+    public const int SolutionScribeAllFilesGroup = 0x0102;
     public const int CreateLicenseFileCommand = 0x0200;
     public const int CreateReadmeFileCommand = 0x0201;
     public const int CreateContributingFileCommand = 0x0202;
     public const int CreateChangelogFileCommand = 0x0203;
     public const int CreateCodeOfConductFileCommand = 0x0204;
+    public const int CreateAllDocumentationFilesCommand = 0x0205;
 }

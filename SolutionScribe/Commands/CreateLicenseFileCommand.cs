@@ -1,5 +1,4 @@
 ﻿using SolutionScribe.Windows;
-using System.Windows.Forms;
 
 namespace SolutionScribe.Commands;
 
@@ -13,10 +12,6 @@ internal sealed class CreateLicenseFileCommand :
     {
         ThreadHelper.ThrowIfNotOnUIThread();
 
-        using var details = new LicenseDataWindow();
-
-        return VisualStudioModalDialog.Show(details) == DialogResult.OK
-            ? details.PopulatedLicenseText.Trim()
-            : null;
+        return LicenseDataWindow.AskForLicenseText();
     }
 }

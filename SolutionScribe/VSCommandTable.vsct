@@ -11,6 +11,11 @@
 		  <Group guid="SolutionScribe" id="SolutionScribeMenuGroup" priority="0x0600">
 			  <Parent guid="VSMainMenu" id="Tools"/>
 		  </Group>
+		  <!-- Its own group, so the shell draws a separator between it and the five
+		       individual file commands. -->
+		  <Group guid="SolutionScribe" id="SolutionScribeAllFilesGroup" priority="0x0050">
+			  <Parent guid="SolutionScribe" id="SolutionScribeSubMenu"/>
+		  </Group>
 		  <Group guid="SolutionScribe" id="SolutionScribeSubMenuGroup" priority="0x0100">
 			  <Parent guid="SolutionScribe" id="SolutionScribeSubMenu"/>
 		  </Group>
@@ -28,6 +33,13 @@
 	  
 	  <!--This section defines the elements the user can interact with, like a menu command or a button or combo box in a toolbar. -->
 	  <Buttons>
+		  <Button guid="SolutionScribe" id="CreateAllDocumentationFilesCommand" priority="0x0100" type="Button">
+			  <Parent guid="SolutionScribe" id="SolutionScribeAllFilesGroup" />
+			  <Strings>
+				  <ButtonText>Create all documentation files</ButtonText>
+			  </Strings>
+		  </Button>
+
 		  <Button guid="SolutionScribe" id="CreateLicenseFileCommand" priority="0x0200" type="Button">
 			  <Parent guid="SolutionScribe" id="SolutionScribeSubMenuGroup" />
 			  <Strings>
@@ -70,6 +82,7 @@
 	     BeforeQueryStatus override lets the shell decide without loading the package. -->
 	<VisibilityConstraints>
 		<VisibilityItem guid="SolutionScribe" id="SolutionScribeSubMenu" context="UICONTEXT_SolutionExists" />
+		<VisibilityItem guid="SolutionScribe" id="CreateAllDocumentationFilesCommand" context="UICONTEXT_SolutionExists" />
 		<VisibilityItem guid="SolutionScribe" id="CreateLicenseFileCommand" context="UICONTEXT_SolutionExists" />
 		<VisibilityItem guid="SolutionScribe" id="CreateReadmeFileCommand" context="UICONTEXT_SolutionExists" />
 		<VisibilityItem guid="SolutionScribe" id="CreateContributingFileCommand" context="UICONTEXT_SolutionExists" />
@@ -82,11 +95,13 @@
 			<IDSymbol name="SolutionScribeMenuGroup" value="0x0001" />
 			<IDSymbol name="SolutionScribeSubMenu" value="0x0100" />
 			<IDSymbol name="SolutionScribeSubMenuGroup" value="0x0101" />
+			<IDSymbol name="SolutionScribeAllFilesGroup" value="0x0102" />
 			<IDSymbol name="CreateLicenseFileCommand" value="0x0200" />
 			<IDSymbol name="CreateReadmeFileCommand" value="0x0201" />
 			<IDSymbol name="CreateContributingFileCommand" value="0x0202" />
 			<IDSymbol name="CreateChangelogFileCommand" value="0x0203" />
 			<IDSymbol name="CreateCodeOfConductFileCommand" value="0x0204" />
+			<IDSymbol name="CreateAllDocumentationFilesCommand" value="0x0205" />
 		</GuidSymbol>
 	</Symbols>
 	
