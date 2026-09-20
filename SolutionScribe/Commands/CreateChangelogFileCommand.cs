@@ -9,5 +9,5 @@ internal sealed class CreateChangelogFileCommand :
     protected override string FileName => "CHANGELOG.md";
 
     protected override string GetContent() =>
-        TempateFileRepository.GetChangelogTemplate();
+        TemplateFileRepository.GetChangelogTemplate();
 }

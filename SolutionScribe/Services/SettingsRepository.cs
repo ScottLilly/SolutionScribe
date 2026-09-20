@@ -11,41 +11,45 @@ internal static class SettingsRepository
         DefaultCopyrightHolder
     }
 
-    private static readonly string _appDataFolder =
+    private static readonly string s_appDataFolder =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Solution Scribe");
 
-    private static readonly string _settingsFilePath = Path.Combine(_appDataFolder, "settings.json");
+    private static readonly string s_settingsFilePath = Path.Combine(s_appDataFolder, "settings.json");
 
-    private static Dictionary<string, string> _settingsCache;
+    private static Dictionary<string, string> s_settingsCache;
 
     private static void EnsureSettingsLoaded()
     {
-        if (_settingsCache != null)
+        if (s_settingsCache != null)
         {
             return;
         }
 
-        if (!Directory.Exists(_appDataFolder))
+        if (!Directory.Exists(s_appDataFolder))
         {
-            Directory.CreateDirectory(_appDataFolder);
+            Directory.CreateDirectory(s_appDataFolder);
         }
 
-        if (!File.Exists(_settingsFilePath))
+        if (!File.Exists(s_settingsFilePath))
         {
-            _settingsCache = [];
+            s_settingsCache = [];
 
             return;
         }
 
         try
         {
-            string json = File.ReadAllText(_settingsFilePath);
+            string json = File.ReadAllText(s_settingsFilePath);
 
-            _settingsCache = JsonConvert.DeserializeObject<Dictionary<string, string>>(json) ?? [];
+            s_settingsCache = JsonConvert.DeserializeObject<Dictionary<string, string>>(json) ?? [];
         }
-        catch
+        catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException || ex is JsonException)
         {
-            _settingsCache = [];
+            // An unreadable or corrupt settings file must not stop the command, but the next save
+            // overwrites it, so say so in the Extensions output pane rather than losing it silently.
+            ex.Log();
+
+            s_settingsCache = [];
         }
     }
 
@@ -53,18 +57,18 @@ internal static class SettingsRepository
     {
         EnsureSettingsLoaded();
 
-        _settingsCache[key.ToString()] = value;
+        s_settingsCache[key.ToString()] = value;
 
-        string json = JsonConvert.SerializeObject(_settingsCache, Formatting.Indented);
+        string json = JsonConvert.SerializeObject(s_settingsCache, Formatting.Indented);
 
-        File.WriteAllText(_settingsFilePath, json);
+        File.WriteAllText(s_settingsFilePath, json);
     }
 
     public static string GetSetting(Key key, string defaultValue = null)
     {
         EnsureSettingsLoaded();
 
-        return _settingsCache.TryGetValue(key.ToString(), out var value)
+        return s_settingsCache.TryGetValue(key.ToString(), out var value)
             ? value
             : defaultValue ?? string.Empty;
     }

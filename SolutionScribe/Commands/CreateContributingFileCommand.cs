@@ -9,5 +9,5 @@ internal sealed class CreateContributingFileCommand :
     protected override string FileName => "CONTRIBUTING.md";
 
     protected override string GetContent() =>
-        TempateFileRepository.GetContributingTemplate();
+        TemplateFileRepository.GetContributingTemplate();
 }

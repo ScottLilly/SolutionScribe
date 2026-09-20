@@ -9,5 +9,5 @@ internal sealed class CreateReadmeFileCommand :
     protected override string FileName => "README.md";
 
     protected override string GetContent() =>
-        TempateFileRepository.GetReadmeTemplate();
+        TemplateFileRepository.GetReadmeTemplate();
 }

@@ -2,7 +2,7 @@
 
 namespace SolutionScribe.Services;
 
-internal static class TempateFileRepository
+internal static class TemplateFileRepository
 {
     public static string GetChangelogTemplate()
     {
@@ -26,7 +26,7 @@ internal static class TempateFileRepository
 
     private static string LoadEmbeddedDefault(string resourceName)
     {
-        var assembly = typeof(SettingsRepository).Assembly;
+        var assembly = typeof(TemplateFileRepository).Assembly;
 
         using var stream = assembly.GetManifestResourceStream(resourceName);
 
