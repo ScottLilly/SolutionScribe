@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SolutionScribe.Core.Models;
 using SolutionScribe.Core.Services;
+using System;
 using System.Linq;
 
 namespace Tests.SolutionScribe.Core;
@@ -44,6 +45,20 @@ public class LicenseRepositoryTests
         CollectionAssert.AllItemsAreUnique(names);
     }
 
+    /// <summary>
+    /// The list is what the dialog's drop down shows, in the order it shows it, so a license
+    /// added in the wrong place lands in the middle of the list instead of where it is looked for.
+    /// </summary>
+    [TestMethod]
+    public void GetLicenseDetailsList_Always_ReturnsLicensesSortedByName()
+    {
+        var names = LicenseRepository.GetLicenseDetailsList()
+            .Select(license => license.LicenseName)
+            .ToList();
+
+        CollectionAssert.AreEqual(names.OrderBy(name => name, StringComparer.Ordinal).ToList(), names);
+    }
+
     [TestMethod]
     public void GetLicenseDetailsList_Always_ReturnsUniqueSpdxIds()
     {
@@ -55,11 +70,31 @@ public class LicenseRepositoryTests
     }
 
     [TestMethod]
-    public void GetLicenseDetailsList_Always_ReturnsAnOpenSourceOrgUrlForEveryLicense()
+    public void GetLicenseDetailsList_Always_ReturnsAnAbsoluteHttpsUrlForEveryLicense()
     {
         foreach (var license in LicenseRepository.GetLicenseDetailsList())
         {
-            StringAssert.StartsWith(license.LicenseUrl, "https://opensource.org/license/", license.SPDXID);
+            Assert.IsTrue(
+                Uri.TryCreate(license.LicenseUrl, UriKind.Absolute, out Uri uri) &&
+                uri.Scheme == Uri.UriSchemeHttps,
+                $"{license.SPDXID} has no usable URL: '{license.LicenseUrl}'.");
+        }
+    }
+
+    /// <summary>
+    /// Every license but CC0-1.0 is OSI approved and named after its page there. The OSI rejected
+    /// CC0-1.0, so it points at the Creative Commons deed instead.
+    /// </summary>
+    [TestMethod]
+    public void GetLicenseDetailsList_EveryLicenseExceptCC0_LinksToOpenSourceOrg()
+    {
+        foreach (var license in LicenseRepository.GetLicenseDetailsList())
+        {
+            string expectedHost = license.SPDXID == "CC0-1.0"
+                ? "creativecommons.org"
+                : "opensource.org";
+
+            Assert.AreEqual(expectedHost, new Uri(license.LicenseUrl).Host, license.SPDXID);
         }
     }
 
@@ -113,14 +148,19 @@ public class LicenseRepositoryTests
     [DataRow("Apache-2.0", true)]
     [DataRow("BSD-2-Clause", true)]
     [DataRow("BSD-3-Clause", true)]
+    [DataRow("AGPL-3.0-only", true)]
     [DataRow("GPL-3.0-only", true)]
+    [DataRow("ISC", true)]
     [DataRow("LGPL-3.0-only", true)]
+    [DataRow("BSL-1.0", false)]
+    [DataRow("CC0-1.0", false)]
     [DataRow("CDDL-1.0", false)]
     [DataRow("EPL-2.0", false)]
     [DataRow("GPL-2.0-only", false)]
     [DataRow("LGPL-2.0-only", false)]
     [DataRow("LGPL-2.1-only", false)]
     [DataRow("MPL-2.0", false)]
+    [DataRow("Unlicense", false)]
     public void HasPlaceholders_ForEachLicense_MatchesItsEmbeddedText(string spdxId, bool expected)
     {
         // The dialog disables its year and copyright holder fields from this, so a text edited to

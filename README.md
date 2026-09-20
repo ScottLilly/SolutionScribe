@@ -10,17 +10,22 @@ The files will be placed in the "Solution Items" folder. The folder will be crea
 
 The available licenses are:
 -	Apache License, Version 2.0
+-	Boost Software License 1.0
 -	Common Development and Distribution License 1.0
+-	Creative Commons Zero 1.0 Universal
 -	Eclipse Public License version 2.0
+-	GNU Affero General Public License version 3
 -	GNU General Public License version 2
 -	GNU General Public License version 3
 -	GNU Lesser General Public License version 2.1
 -	GNU Lesser General Public License version 3
 -	GNU Library General Public License version 2
+-	ISC License
 -	Mozilla Public License 2.0
 -	The 2-Clause BSD License
 -	The 3-Clause BSD License
 -	The MIT License
+-	The Unlicense
 
 ## Project Overview
 
