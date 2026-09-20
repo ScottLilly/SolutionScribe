@@ -109,6 +109,29 @@ public class LicenseRepositoryTests
     }
 
     [TestMethod]
+    [DataRow("MIT", true)]
+    [DataRow("Apache-2.0", true)]
+    [DataRow("BSD-2-Clause", true)]
+    [DataRow("BSD-3-Clause", true)]
+    [DataRow("GPL-3.0-only", true)]
+    [DataRow("LGPL-3.0-only", true)]
+    [DataRow("CDDL-1.0", false)]
+    [DataRow("EPL-2.0", false)]
+    [DataRow("GPL-2.0-only", false)]
+    [DataRow("LGPL-2.0-only", false)]
+    [DataRow("LGPL-2.1-only", false)]
+    [DataRow("MPL-2.0", false)]
+    public void HasPlaceholders_ForEachLicense_MatchesItsEmbeddedText(string spdxId, bool expected)
+    {
+        // The dialog disables its year and copyright holder fields from this, so a text edited to
+        // add or drop a placeholder has to show up here.
+        var license = LicenseRepository.GetLicenseDetailsList()
+            .Single(candidate => candidate.SPDXID == spdxId);
+
+        Assert.AreEqual(expected, license.HasPlaceholders);
+    }
+
+    [TestMethod]
     public void GetLicenseDetailsList_Always_ReturnsAtLeastOneLicenseWithPlaceholders()
     {
         // Guards against a change that strips the placeholders out of every text, which would

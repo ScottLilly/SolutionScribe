@@ -70,6 +70,7 @@
     <Compile Include="Windows\LicenseDataWindow.Designer.cs">
       <DependentUpon>LicenseDataWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\VisualStudioModalDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documentation\GettingStartedGuide.rtf">

@@ -6,6 +6,30 @@ namespace Tests.SolutionScribe.Core;
 [TestClass]
 public class LicenseDetailsTests
 {
+    #region HasPlaceholders
+
+    [TestMethod]
+    public void HasPlaceholders_TextWithBothPlaceholders_IsTrue()
+    {
+        Assert.IsTrue(LicenseWithText("Copyright (c) <year> <copyright holder>").HasPlaceholders);
+    }
+
+    [TestMethod]
+    public void HasPlaceholders_TextWithNoPlaceholders_IsFalse()
+    {
+        Assert.IsFalse(LicenseWithText("No placeholders here.").HasPlaceholders);
+    }
+
+    [TestMethod]
+    public void HasPlaceholders_EmptyText_IsFalse()
+    {
+        Assert.IsFalse(LicenseWithText(string.Empty).HasPlaceholders);
+    }
+
+    #endregion
+
+    #region PopulateText
+
     [TestMethod]
     public void PopulateText_TextWithBothPlaceholders_ReplacesBoth()
     {
@@ -48,6 +72,8 @@ public class LicenseDetailsTests
         Assert.AreEqual("Copyright (c) 2024-2026 Scott Lilly",
             license.PopulateText("2024-2026", "Scott Lilly"));
     }
+
+    #endregion
 
     private static LicenseDetails LicenseWithText(string licenseText) =>
         new LicenseDetails("The MIT License", "MIT", "https://opensource.org/license/mit", licenseText);

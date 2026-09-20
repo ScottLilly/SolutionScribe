@@ -19,6 +19,14 @@ public class LicenseDetails
     public string LicenseText { get; }
 
     /// <summary>
+    /// True when the license text has somewhere to put the year and copyright holder. The GPL,
+    /// LGPL, EPL, CDDL and MPL texts are fixed, so neither value is used for them.
+    /// </summary>
+    public bool HasPlaceholders =>
+        LicenseText.Contains(YEAR_PLACEHOLDER) ||
+        LicenseText.Contains(COPYRIGHT_HOLDER_PLACEHOLDER);
+
+    /// <summary>
     /// The license text with the year and copyright holder placeholders filled in. A license whose
     /// text has no placeholders is returned unchanged.
     /// </summary>

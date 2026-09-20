@@ -11,9 +11,11 @@ internal sealed class CreateLicenseFileCommand :
 
     protected override string? GetContent()
     {
-        var details = new LicenseDataWindow();
+        ThreadHelper.ThrowIfNotOnUIThread();
 
-        return details.ShowDialog() == DialogResult.OK
+        using var details = new LicenseDataWindow();
+
+        return VisualStudioModalDialog.Show(details) == DialogResult.OK
             ? details.PopulatedLicenseText.Trim()
             : null;
     }
