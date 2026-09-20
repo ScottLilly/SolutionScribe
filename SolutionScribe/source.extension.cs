@@ -12,7 +12,7 @@ namespace SolutionScribe
         public const string Name = "Solution Scribe";
         public const string Description = @"Create README, LICENSE, CHANGELOG, CONTRIBUTING, CODE_OF_CONDUCT and SECURITY files, and GitHub issue and pull request templates, for the solution you have open.";
         public const string Language = "en-US";
-        public const string Version = "1.1.0";
+        public const string Version = "2.0.0";
         public const string Author = "Scott Lilly";
         public const string Tags = "documentation, readme, license, changelog, contributing, code of conduct, security, github, solution, scaffolding";
         public const bool IsPreview = false;
