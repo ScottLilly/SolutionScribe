@@ -69,6 +69,35 @@ public class VsixManifestTests
 
     #endregion
 
+    #region Installation target
+
+    [TestMethod]
+    public void ManifestInstallationTarget_Always_IsOpenEndedFrom17()
+    {
+        // Visual Studio 2026 decides compatibility from the API version an extension targets. It
+        // reads only the lower bound of this range and ignores the upper bound, so an upper bound
+        // excludes nothing and only misleads whoever reads it next. 17.0 is what keeps Visual
+        // Studio 2022 in.
+        string version = ManifestValue("<InstallationTarget[^>]*?Version=\"([^\"]+)\"");
+
+        Assert.AreEqual("[17.0,)", version,
+            $"The manifest's installation target is '{version}'. Changing it narrows which " +
+            "versions of Visual Studio can install the extension, which is a decision rather " +
+            "than a tidy-up.");
+    }
+
+    [TestMethod]
+    public void Manifest_Always_DeclaresAnX64Payload()
+    {
+        // Required from 17.0 on, with no default. Visual Studio will not install the extension
+        // without it, and the VSIX manifest designer has been known to drop it.
+        StringAssert.Contains(Manifest(), "<ProductArchitecture>amd64</ProductArchitecture>",
+            "The manifest declares no amd64 product architecture, so Visual Studio will refuse " +
+            "to install the extension.");
+    }
+
+    #endregion
+
     private static void AssertGeneratedMatchesManifest(string constantName, string manifestPattern)
     {
         string expected = ManifestValue(manifestPattern);

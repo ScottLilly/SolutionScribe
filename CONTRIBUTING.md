@@ -18,7 +18,7 @@ To contribute, set up the project locally:
   git clone https://github.com/[your-user-name]/SolutionScribe.git
   cd SolutionScribe
   ```
-- **Open the Solution**: Open `SolutionScribe.sln` in Visual Studio 2022 (17.0 or later) with the **Visual Studio extension development** workload installed. The VSIX project needs it.
+- **Open the Solution**: Open `SolutionScribe.sln` in Visual Studio 2022 or Visual Studio 2026, with the **Visual Studio extension development** workload installed. The VSIX project needs it. The test project targets net48 so that the solution still opens in 2022, which ships a .NET 9 SDK.
 - **Build and Verify**: Build the solution (`Ctrl+Shift+B`). `dotnet build` cannot build this solution, because the VSIX project uses MSBuild tasks that only exist on .NET Framework MSBuild. From a command line, use `MSBuild.exe SolutionScribe.sln -restore` from a Visual Studio install.
 - **Run It**: Press `F5` to launch an experimental instance of Visual Studio with the extension loaded. Open any solution there and the commands appear under Tools > Solution Scribe.
 

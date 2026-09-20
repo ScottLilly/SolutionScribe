@@ -76,10 +76,10 @@ commands that write several leave existing files alone and say which ones they s
 
 ## Requirements
 
-- Visual Studio 2022, version 17.0 or later
+- Visual Studio 2022 (17.x) or Visual Studio 2026 (18.x)
 - 64 bit Windows
 
-Visual Studio 2026 is not supported yet.
+Arm64 Visual Studio is not supported. The extension declares an x64 payload only.
 
 ## Contributing
 

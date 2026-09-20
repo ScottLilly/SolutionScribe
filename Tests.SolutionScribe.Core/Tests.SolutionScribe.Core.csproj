@@ -3,7 +3,8 @@
   <PropertyGroup>
     <!-- net48 rather than the net10.0 the other repos use, because Visual Studio 2022 ships a .NET
          9 SDK and cannot build a net10.0 project, and this solution has to open in the same
-         Visual Studio that builds the VSIX. It can move once the extension supports VS 2026. -->
+         Visual Studio that builds the VSIX. VS 2026 ships a .NET 10 SDK, so it can move whenever
+         the solution no longer has to open in 2022. -->
     <TargetFramework>net48</TargetFramework>
     <RootNamespace>Tests.SolutionScribe.Core</RootNamespace>
     <AssemblyName>Tests.SolutionScribe.Core</AssemblyName>

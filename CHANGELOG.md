@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Support for Visual Studio 2026. The extension installs into both Visual Studio 2022 and Visual Studio 2026.
 - "Create all documentation files", which writes every file in one pass and leaves alone the ones that are already there.
 - "Create SECURITY file", and a SECURITY.md template covering supported versions and how to report a vulnerability privately.
 - "Create GitHub templates", which writes `.github\ISSUE_TEMPLATE\bug_report.md`, `.github\ISSUE_TEMPLATE\feature_request.md` and `.github\PULL_REQUEST_TEMPLATE.md`.

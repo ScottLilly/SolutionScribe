@@ -51,8 +51,8 @@ only exist on .NET Framework MSBuild. Build the solution with Visual Studio, or 
 `SolutionScribe.Core` touches the VSSDK.
 
 The test project targets net48 rather than the net10.0 used elsewhere, because Visual Studio 2022
-ships a .NET 9 SDK and cannot build a net10.0 project. It can move once the extension supports
-Visual Studio 2026.
+ships a .NET 9 SDK and cannot build a net10.0 project. Visual Studio 2026 ships a .NET 10 SDK, so
+it can move whenever the solution no longer has to open in 2022.
 
 ## Versioning
 
