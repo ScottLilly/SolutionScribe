@@ -21,7 +21,12 @@ Studio, and everything worth testing is on that side of the line: the license li
 embedded texts, the document templates, placeholder substitution, and the settings file.
 
 What stays in the VSIX is the part that cannot run outside Visual Studio anyway: the package, the
-commands, and the WinForms dialog. It is untested.
+commands, and the WPF dialog. It is untested.
+
+The dialog derives from `Microsoft.VisualStudio.PlatformUI.DialogWindow`, which supplies Visual
+Studio's themed dialog styles and its `ShowModal`, so the dialog follows the IDE's theme, font and
+DPI, and is parented to the main window without a helper of its own. Its XAML sets no font, color
+or pixel position; anything it does set comes from a `VsBrushes` key.
 
 Two consequences of the boundary:
 

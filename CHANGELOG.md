@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - A Cancel button on the license dialog, with Enter and Esc bound to it and to Create File.
 
 ### Changed
+- The license dialog follows the Visual Studio theme, font and DPI. Dark theme users no longer get a white dialog.
 - The license dialog is modal to Visual Studio, so it can no longer end up behind the IDE.
 - The copyright year and holder fields are disabled, with a note saying why, for licenses whose text has nowhere to put them. They used to accept input and then ignore it.
 - The license list no longer accepts typed text that matches nothing.

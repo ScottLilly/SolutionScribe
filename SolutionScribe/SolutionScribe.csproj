@@ -69,13 +69,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VSCommandTable.vsct</DependentUpon>
     </Compile>
-    <Compile Include="Windows\LicenseDataWindow.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Windows\LicenseDataWindow.xaml.cs">
+      <DependentUpon>LicenseDataWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Windows\LicenseDataWindow.Designer.cs">
-      <DependentUpon>LicenseDataWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\VisualStudioModalDialog.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Windows\LicenseDataWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documentation\GettingStartedGuide.rtf">
@@ -119,22 +122,18 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Design" />
     <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Community.VisualStudio.VSCT" Version="16.0.29.6" PrivateAssets="all" />
     <PackageReference Include="Community.VisualStudio.Toolkit.17" Version="17.0.451" ExcludeAssets="Runtime" />
     <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.0.5232" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Windows\LicenseDataWindow.resx">
-      <DependentUpon>LicenseDataWindow.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
