@@ -1,6 +1,6 @@
-﻿# Contributing to [your-repo-name]
+﻿# Contributing to <repository>
 
-Thank you for contributing to [your-repo-name], an open-source project! This guide outlines how to contribute effectively, ensuring high-quality code and a collaborative environment. Please read this before submitting contributions.
+Thank you for contributing to <repository>, an open-source project! This guide outlines how to contribute effectively, ensuring high-quality code and a collaborative environment. Please read this before submitting contributions.
 
 ## Code of Conduct
 
@@ -15,8 +15,8 @@ To contribute, set up the project locally:
 - **Fork the Repository**: Click "Fork" on the repository's GitHub page to create a copy in your account.
 - **Clone Your Fork**:
   ```bash
-  git clone https://github.com/[your-user-name]/[your-repo-name].git
-  cd [your-repo-name]
+  git clone https://github.com/<github user>/<repository>.git
+  cd <repository>
   ```
 - **Open the Solution**: Open the `.sln` file in Visual Studio (2022 or later recommended).
 - **Install Dependencies**: Ensure you have the .NET SDK (version [specify, e.g., 8.0 or latest]). Restore packages with `dotnet restore`, or let Visual Studio restore them on the first build.
@@ -26,7 +26,7 @@ To contribute, set up the project locally:
 
 We use GitHub Issues to track bugs, features, and tasks:
 
-- **Browse Issues**: Visit the [Issues tab](https://github.com/[your-user-name]/[your-repo-name]/issues) and look for "good first issue" or "help wanted" labels.
+- **Browse Issues**: Visit the [Issues tab](https://github.com/<github user>/<repository>/issues) and look for "good first issue" or "help wanted" labels.
 - **Create an Issue**: Propose a bug fix or feature by creating an issue using our templates (see [Issue Templates](#issue-templates)).
 - **Wait for Approval**: Work only on issues a maintainer has approved for contribution. Comment on the issue and ask before starting. [If this project tracks approval on a board or with a label, say which column or label means approved.]
 
@@ -43,7 +43,7 @@ All code contributions must be submitted via pull requests:
 - **Pull the Latest Code**:
   - Before pushing, ensure your branch has the latest `master` branch code:
     ```bash
-    git remote add upstream https://github.com/[original-owner]/[your-repo-name].git
+    git remote add upstream https://github.com/<github user>/<repository>.git
     git fetch upstream
     git rebase upstream/master
     ```
@@ -73,7 +73,7 @@ All code contributions must be submitted via pull requests:
 
 To create an issue:
 
-- Go to the [Issues tab](https://github.com/[your-user-name]/[your-repo-name]/issues) and click "New Issue."
+- Go to the [Issues tab](https://github.com/<github user>/<repository>/issues) and click "New Issue."
 - Choose a template (e.g., "Bug Report" or "Feature Request") and fill out all fields.
 
 Maintainers review issues and say on the issue when one is approved for contribution.
@@ -98,9 +98,9 @@ PRs use a template to describe changes. Include:
 
 All communication happens on GitHub:
 
-- Use the [Issues tab](https://github.com/[your-user-name]/[your-repo-name]/issues) for questions or discussions.
+- Use the [Issues tab](https://github.com/<github user>/<repository>/issues) for questions or discussions.
 - Comment on issues or PRs for clarifications.
-- Check [GitHub Discussions](https://github.com/[your-user-name]/[your-repo-name]/discussions) for broader topics (if enabled).
+- Check [GitHub Discussions](https://github.com/<github user>/<repository>/discussions) for broader topics (if enabled).
 
 ### 8. Legal
 
@@ -108,4 +108,4 @@ Contributions are licensed under the terms in the [LICENSE.txt](LICENSE.txt) fil
 
 ## Thank You!
 
-Your contributions make [your-repo-name] better. Thank you for your time and effort!
+Your contributions make <repository> better. Thank you for your time and effort!

@@ -1,6 +1,6 @@
 ﻿# Security Policy
 
-Thank you for helping keep [your-repo-name] and the people who use it safe.
+Thank you for helping keep <repository> and the people who use it safe.
 
 ## Supported Versions
 
@@ -20,8 +20,8 @@ Security fixes are released for the versions below. Anything not listed is unsup
 
 Report it privately instead:
 
-- Use [GitHub's private vulnerability reporting](https://github.com/[your-user-name]/[your-repo-name]/security/advisories/new), on the repository's Security tab. [Turn this on first under Settings > Security > Private vulnerability reporting, or delete this line and leave the email address below.]
-- Or email [your-security-email-address].
+- Use [GitHub's private vulnerability reporting](https://github.com/<github user>/<repository>/security/advisories/new), on the repository's Security tab. [Turn this on first under Settings > Security > Private vulnerability reporting, or delete this line and leave the email address below.]
+- Or email <security email>.
 
 Include whatever you have: the affected version, what an attacker could do with it, and the steps to reproduce it. A proof of concept helps, but do not let a missing one stop you from reporting.
 

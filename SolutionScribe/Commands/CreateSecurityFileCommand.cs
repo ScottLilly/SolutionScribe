@@ -8,6 +8,10 @@ internal sealed class CreateSecurityFileCommand :
 {
     protected override string FileName => "SECURITY.md";
 
-    protected override string GetContent() =>
-        TemplateFileRepository.GetSecurityTemplate();
+    protected override string? GetContent(SolutionDirectory solutionDirectory)
+    {
+        ThreadHelper.ThrowIfNotOnUIThread();
+
+        return PopulatedTemplate.For(TemplateFileRepository.GetSecurityTemplate(), solutionDirectory);
+    }
 }

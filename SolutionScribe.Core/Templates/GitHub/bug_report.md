@@ -29,7 +29,7 @@ If a screenshot explains the problem better than words, add it here.
 ## Environment
 
 - OS: [e.g. Windows 11]
-- Version of [your-repo-name]: [e.g. 1.2.0]
+- Version of <repository>: [e.g. 1.2.0]
 - [Add anything else that matters for this project, such as a runtime or browser version, or delete this line.]
 
 ## Additional context

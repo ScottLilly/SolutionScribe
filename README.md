@@ -66,6 +66,13 @@ not already there. The GitHub templates go into a `.github` solution folder inst
 where they sit on disk. The new file then opens in the editor, because every template needs
 editing before it is any use.
 
+Any command that writes a file with something to fill in asks for the project's details first: the
+repository name, your GitHub user, a NuGet package name, and the address SECURITY.md should point
+people at. The repository name and GitHub user come from the solution's git remote when it has
+one, so usually there is nothing to type. Leave the package name empty and README.md is written
+for an application; fill it in and it gets NuGet badges and install instructions instead. A command
+writing several files asks once, and a template with nothing to fill in never asks at all.
+
 **Create LICENSE file** asks which license you want, along with the copyright year and holder. It
 remembers the copyright holder you used last time and fills it in for you, and you can set it
 yourself under Tools > Options > Solution Scribe. Licenses whose text has nowhere to put a

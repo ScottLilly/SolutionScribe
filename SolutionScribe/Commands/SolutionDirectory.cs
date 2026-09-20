@@ -15,13 +15,17 @@ internal sealed class SolutionDirectory
 
     private readonly EnvDTE.Solution _solution;
 
-    private SolutionDirectory(EnvDTE.Solution solution, string fullPath)
+    private SolutionDirectory(EnvDTE.Solution solution, string fullPath, string name)
     {
         _solution = solution;
         FullPath = fullPath;
+        Name = name;
     }
 
     public string FullPath { get; }
+
+    /// <summary>The solution's file name without its extension, which is the default project name.</summary>
+    public string Name { get; }
 
     /// <summary>
     /// The open solution's directory, or null when there is no open solution, which it reports
@@ -42,7 +46,10 @@ internal sealed class SolutionDirectory
             return null;
         }
 
-        return new SolutionDirectory(solution, Path.GetDirectoryName(solution.FullName));
+        return new SolutionDirectory(
+            solution,
+            Path.GetDirectoryName(solution.FullName),
+            Path.GetFileNameWithoutExtension(solution.FullName));
     }
 
     /// <param name="relativePath">

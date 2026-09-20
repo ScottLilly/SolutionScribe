@@ -8,6 +8,10 @@ internal sealed class CreateReadmeFileCommand :
 {
     protected override string FileName => "README.md";
 
-    protected override string GetContent() =>
-        TemplateFileRepository.GetReadmeTemplate();
+    protected override string? GetContent(SolutionDirectory solutionDirectory)
+    {
+        ThreadHelper.ThrowIfNotOnUIThread();
+
+        return PopulatedTemplate.For(TemplateFileRepository.GetReadmeTemplate(), solutionDirectory);
+    }
 }

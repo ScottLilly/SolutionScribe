@@ -1,0 +1,97 @@
+﻿<platformUi:DialogWindow x:Class="SolutionScribe.Windows.ProjectDetailsWindow"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:platformUi="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.15.0"
+                         xmlns:shell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
+                         Title="Project Details"
+                         Width="620"
+                         SizeToContent="Height"
+                         ResizeMode="NoResize"
+                         ShowInTaskbar="False"
+                         WindowStartupLocation="CenterOwner">
+
+    <Grid Margin="12">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                   Margin="0,0,0,12"
+                   Foreground="{DynamicResource {x:Static shell:VsBrushes.GrayTextKey}}"
+                   Text="These fill in the links and names in the files being created. Anything already known from the solution's git remote is filled in for you."
+                   TextWrapping="Wrap" />
+
+        <Label Grid.Row="1" Grid.Column="0"
+               Margin="0,0,8,6"
+               VerticalAlignment="Center"
+               Content="_Repository name:"
+               Target="{Binding ElementName=RepositoryName}" />
+
+        <TextBox x:Name="RepositoryName"
+                 Grid.Row="1" Grid.Column="1"
+                 Margin="0,0,0,6" />
+
+        <Label Grid.Row="2" Grid.Column="0"
+               Margin="0,0,8,6"
+               VerticalAlignment="Center"
+               Content="GitHub _user:"
+               Target="{Binding ElementName=GitHubUser}" />
+
+        <TextBox x:Name="GitHubUser"
+                 Grid.Row="2" Grid.Column="1"
+                 Margin="0,0,0,6" />
+
+        <Label Grid.Row="3" Grid.Column="0"
+               Margin="0,0,8,6"
+               VerticalAlignment="Center"
+               Content="_NuGet package:"
+               Target="{Binding ElementName=NuGetPackage}" />
+
+        <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,0,0,6">
+            <TextBox x:Name="NuGetPackage" />
+            <TextBlock Margin="0,3,0,0"
+                       Foreground="{DynamicResource {x:Static shell:VsBrushes.GrayTextKey}}"
+                       Text="Leave this empty unless the project publishes a package. It decides whether README.md gets NuGet badges and install instructions."
+                       TextWrapping="Wrap" />
+        </StackPanel>
+
+        <Label Grid.Row="4" Grid.Column="0"
+               Margin="0,0,8,0"
+               VerticalAlignment="Center"
+               Content="Security _email:"
+               Target="{Binding ElementName=SecurityEmail}" />
+
+        <TextBox x:Name="SecurityEmail"
+                 Grid.Row="4" Grid.Column="1" />
+
+        <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                    Margin="0,18,0,0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+
+            <Button x:Name="CreateFilesButton"
+                    MinWidth="86"
+                    MinHeight="24"
+                    Margin="0,0,8,0"
+                    Padding="12,2"
+                    Content="Continue"
+                    IsDefault="True"
+                    Click="CreateFilesButton_Click" />
+
+            <Button MinWidth="86"
+                    MinHeight="24"
+                    Padding="12,2"
+                    Content="Cancel"
+                    IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</platformUi:DialogWindow>

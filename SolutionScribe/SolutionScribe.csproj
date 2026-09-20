@@ -56,6 +56,7 @@
     <Compile Include="Commands\CreateGitHubTemplatesCommand.cs" />
     <Compile Include="Commands\CreateSolutionFileCommandBase.cs" />
     <Compile Include="Commands\CreatedFilesReport.cs" />
+    <Compile Include="Commands\PopulatedTemplate.cs" />
     <Compile Include="Commands\SolutionDirectory.cs" />
     <Compile Include="Options\GeneralOptions.cs" />
     <Compile Include="Options\OptionsProvider.cs" />
@@ -75,9 +76,17 @@
       <DependentUpon>LicenseDataWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Windows\ProjectDetailsWindow.xaml.cs">
+      <DependentUpon>ProjectDetailsWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Windows\LicenseDataWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\ProjectDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

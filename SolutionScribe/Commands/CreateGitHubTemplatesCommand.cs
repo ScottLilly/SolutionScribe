@@ -1,4 +1,7 @@
-﻿using SolutionScribe.Core.Services;
+﻿using SolutionScribe.Core.Models;
+using SolutionScribe.Core.Services;
+using SolutionScribe.Windows;
+using System.Collections.Generic;
 
 namespace SolutionScribe.Commands;
 
@@ -27,18 +30,36 @@ internal sealed class CreateGitHubTemplatesCommand :
         }
 
         var report = new CreatedFilesReport();
+        var pending = new List<(string RelativePath, string Template)>();
+
+        foreach (var (relativePath, getContent) in s_templates)
+        {
+            if (solutionDirectory.Contains(relativePath))
+            {
+                report.Skipped(relativePath);
+                continue;
+            }
+
+            pending.Add((relativePath, getContent()));
+        }
+
+        ProjectDetails? projectDetails = null;
+
+        if (pending.Exists(template => ProjectDetails.HasPlaceholders(template.Template)))
+        {
+            projectDetails = ProjectDetailsWindow.AskForProjectDetails(solutionDirectory);
+
+            if (projectDetails == null)
+            {
+                return;
+            }
+        }
 
         try
         {
-            foreach (var (relativePath, getContent) in s_templates)
+            foreach (var (relativePath, template) in pending)
             {
-                if (solutionDirectory.Contains(relativePath))
-                {
-                    report.Skipped(relativePath);
-                    continue;
-                }
-
-                solutionDirectory.Write(relativePath, getContent());
+                solutionDirectory.Write(relativePath, projectDetails?.PopulateText(template) ?? template);
                 report.Wrote(relativePath);
             }
         }

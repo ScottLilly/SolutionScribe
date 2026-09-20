@@ -1,5 +1,7 @@
-﻿using SolutionScribe.Core.Services;
+﻿using SolutionScribe.Core.Models;
+using SolutionScribe.Core.Services;
 using SolutionScribe.Windows;
+using System.Collections.Generic;
 
 namespace SolutionScribe.Commands;
 
@@ -31,8 +33,33 @@ internal sealed class CreateAllDocumentationFilesCommand :
 
         var report = new CreatedFilesReport();
 
-        // The license is the only file that asks the user anything, so it is settled before
-        // anything is written and a cancel there abandons the whole command.
+        // Everything the user is asked is settled before anything is written, so a cancel at
+        // either dialog abandons the whole command rather than leaving half the files behind.
+        var pending = new List<(string FileName, string Template)>();
+
+        foreach (var (fileName, getContent) in s_templateFiles)
+        {
+            if (solutionDirectory.Contains(fileName))
+            {
+                report.Skipped(fileName);
+                continue;
+            }
+
+            pending.Add((fileName, getContent()));
+        }
+
+        ProjectDetails? projectDetails = null;
+
+        if (pending.Exists(file => ProjectDetails.HasPlaceholders(file.Template)))
+        {
+            projectDetails = ProjectDetailsWindow.AskForProjectDetails(solutionDirectory);
+
+            if (projectDetails == null)
+            {
+                return;
+            }
+        }
+
         string? licenseText = null;
 
         if (solutionDirectory.Contains(LICENSE_FILE_NAME))
@@ -57,15 +84,9 @@ internal sealed class CreateAllDocumentationFilesCommand :
                 report.Wrote(LICENSE_FILE_NAME);
             }
 
-            foreach (var (fileName, getContent) in s_templateFiles)
+            foreach (var (fileName, template) in pending)
             {
-                if (solutionDirectory.Contains(fileName))
-                {
-                    report.Skipped(fileName);
-                    continue;
-                }
-
-                solutionDirectory.Write(fileName, getContent());
+                solutionDirectory.Write(fileName, projectDetails?.PopulateText(template) ?? template);
                 report.Wrote(fileName);
             }
         }

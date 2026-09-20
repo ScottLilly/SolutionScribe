@@ -7,7 +7,7 @@ internal abstract class CreateSolutionFileCommandBase<T> : BaseCommand<T> where 
     /// <summary>
     /// The content to write, or null if the user canceled. Called on the UI thread.
     /// </summary>
-    protected abstract string? GetContent();
+    protected abstract string? GetContent(SolutionDirectory solutionDirectory);
 
     protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
     {
@@ -27,7 +27,7 @@ internal abstract class CreateSolutionFileCommandBase<T> : BaseCommand<T> where 
             return;
         }
 
-        string? content = GetContent();
+        string? content = GetContent(solutionDirectory);
 
         if (content == null)
         {

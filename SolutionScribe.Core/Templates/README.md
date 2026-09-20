@@ -1,30 +1,31 @@
-﻿# [your-repo-name]
+﻿# <repository>
 
 ## Project Overview
 
-![Build Status](https://github.com/[your-user-name]/[your-repo-name]/actions/workflows/ci.yml/badge.svg)
-[![License](https://img.shields.io/github/license/[your-user-name]/[your-repo-name])](https://github.com/[your-user-name]/[your-repo-name]/blob/master/LICENSE.txt)
-
-<!-- If this project publishes a NuGet package, add these badges as well:
-[![NuGet](https://img.shields.io/nuget/v/[your-nuget-package-name])](https://www.nuget.org/packages/[your-nuget-package-name]/)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/[your-nuget-package-name])](https://www.nuget.org/packages/[your-nuget-package-name]/)
--->
+![Build Status](https://github.com/<github user>/<repository>/actions/workflows/ci.yml/badge.svg)
+[![License](https://img.shields.io/github/license/<github user>/<repository>)](https://github.com/<github user>/<repository>/blob/master/LICENSE.txt)
+<!--#if nuget-->
+[![NuGet](https://img.shields.io/nuget/v/<nuget package>)](https://www.nuget.org/packages/<nuget package>/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/<nuget package>)](https://www.nuget.org/packages/<nuget package>/)
+<!--#endif-->
 
 ## Installation
+<!--#if app-->
 [Say how to install or run this project.]
-
-<!-- If this project publishes a NuGet package, this is the usual wording:
-
+<!--#endif-->
+<!--#if nuget-->
 Install the package with the NuGet Package Manager, or with this command in the Package Manager Console:
 
 ```
-Install-Package [your-nuget-package-name]
+Install-Package <nuget package>
 ```
-Or via the .NET CLI:
+
+Or with the .NET CLI:
+
 ```
-dotnet add package [your-nuget-package-name]
+dotnet add package <nuget package>
 ```
--->
+<!--#endif-->
 
 ## How to use
 
@@ -34,10 +35,10 @@ dotnet add package [your-nuget-package-name]
 ## Contributing
 Contributions are welcome. Please submit issues or pull requests to the GitHub repository.
 
-<a href="https://github.com/[your-user-name]/[your-repo-name]/graphs/contributors"><img src="https://contrib.rocks/image?repo=[your-user-name]/[your-repo-name]" /></a>
+<a href="https://github.com/<github user>/<repository>/graphs/contributors"><img src="https://contrib.rocks/image?repo=<github user>/<repository>" /></a>
 
 ## License
-See the [LICENSE.txt](https://github.com/[your-user-name]/[your-repo-name]/blob/master/LICENSE.txt) file for the terms this project is released under.
+See the [LICENSE.txt](https://github.com/<github user>/<repository>/blob/master/LICENSE.txt) file for the terms this project is released under.
 
 ## Contact
-For questions or feedback, please [open an issue here on GitHub](https://github.com/[your-user-name]/[your-repo-name]/issues).
+For questions or feedback, please [open an issue here on GitHub](https://github.com/<github user>/<repository>/issues).

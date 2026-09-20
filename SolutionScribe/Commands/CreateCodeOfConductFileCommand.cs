@@ -8,6 +8,10 @@ internal sealed class CreateCodeOfConductFileCommand :
 {
     protected override string FileName => "CODE_OF_CONDUCT.md";
 
-    protected override string GetContent() =>
-        TemplateFileRepository.GetCodeOfConductTemplate();
+    protected override string? GetContent(SolutionDirectory solutionDirectory)
+    {
+        ThreadHelper.ThrowIfNotOnUIThread();
+
+        return PopulatedTemplate.For(TemplateFileRepository.GetCodeOfConductTemplate(), solutionDirectory);
+    }
 }

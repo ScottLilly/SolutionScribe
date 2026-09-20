@@ -8,6 +8,10 @@ internal sealed class CreateChangelogFileCommand :
 {
     protected override string FileName => "CHANGELOG.md";
 
-    protected override string GetContent() =>
-        TemplateFileRepository.GetChangelogTemplate();
+    protected override string? GetContent(SolutionDirectory solutionDirectory)
+    {
+        ThreadHelper.ThrowIfNotOnUIThread();
+
+        return PopulatedTemplate.For(TemplateFileRepository.GetChangelogTemplate(), solutionDirectory);
+    }
 }

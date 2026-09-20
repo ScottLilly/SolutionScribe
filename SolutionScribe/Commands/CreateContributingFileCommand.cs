@@ -8,6 +8,10 @@ internal sealed class CreateContributingFileCommand :
 {
     protected override string FileName => "CONTRIBUTING.md";
 
-    protected override string GetContent() =>
-        TemplateFileRepository.GetContributingTemplate();
+    protected override string? GetContent(SolutionDirectory solutionDirectory)
+    {
+        ThreadHelper.ThrowIfNotOnUIThread();
+
+        return PopulatedTemplate.For(TemplateFileRepository.GetContributingTemplate(), solutionDirectory);
+    }
 }
