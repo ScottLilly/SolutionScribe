@@ -9,7 +9,8 @@ What exists and why it is built this way. Work that is not built yet lives in
 SolutionScribe.sln
   SolutionScribe/            net48            VSIX, extension package, commands, license dialog
   SolutionScribe.Core/       netstandard2.0   Licenses, templates, settings
-  Tests.SolutionScribe.Core/ net48            MSTest coverage of SolutionScribe.Core
+  Tests.SolutionScribe.Core/ net48            MSTest coverage of SolutionScribe.Core, and of
+                                              the repository files nothing else checks
 ```
 
 ## The Core boundary
@@ -41,4 +42,26 @@ only exist on .NET Framework MSBuild. Build the solution with Visual Studio, or 
 The test project targets net48 rather than the net10.0 used elsewhere, because Visual Studio 2022
 ships a .NET 9 SDK and cannot build a net10.0 project. It can move once the extension supports
 Visual Studio 2026.
+
+## Versioning
+
+`source.extension.vsixmanifest` holds the version, as the `Version` attribute on `<Identity>`, in
+three parts so it matches the `Version x.y.z` milestone and release it ships as. Bump it when a
+milestone opens, not at release time, so a build taken off the branch mid-milestone is not stamped
+with the last release's number.
+
+Nothing else in the repository states a version. `Vsix.Version` in `source.extension.cs` and the
+assembly attributes in `Properties/AssemblyInfo.cs` both derive from the manifest.
+
+## Generated files that no command line build regenerates
+
+`source.extension.cs` and `VSCommandTable.cs` are written by VSIX Synchronizer, and the VSCT
+compiler reads `VSCommandTable.vsct` rather than the C#. Both generators are Visual Studio
+extensions, so `MSBuild.exe` will happily build a stale or hand-edited copy of either file and say
+nothing.
+
+Editing them by hand is therefore sometimes necessary and always temporary: open the solution in
+Visual Studio afterwards and let the tool rewrite them. `VsixVersionTests` fails when
+`source.extension.cs` and the manifest disagree about the version, which is the half of this worth
+catching automatically. Nothing checks the command ids.
 
